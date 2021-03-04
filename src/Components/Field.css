@@ -1,0 +1,25 @@
+.grid {
+  border: 3px solid black;
+  width: 800px;
+  height: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  margin: 0 auto;
+}
+.pixel {
+  width: 10%;
+  height: 10%;
+  box-sizing: border-box;
+}
+.colorhistory {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+.pixelHistory {
+  width: 30px;
+  height:30px;
+  border: 1px solid;
+  margin-right:2px;
+}
