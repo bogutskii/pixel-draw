@@ -1,6 +1,8 @@
 import "./styles.css";
 import Field from "./Components/Field.js";
-export default function App() {
+
+
+export default function App(props) {
   return (
     <div className="App">
       <h1>Pixel</h1>
@@ -8,3 +10,21 @@ export default function App() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  state: state
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+  changeCreateModal: (value) => dispatch({
+    type: 'CHANGE_CREATE_MODAL',
+    payload: {
+      value: value
+    }
+  }),
+
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

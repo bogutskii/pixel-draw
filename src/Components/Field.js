@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-
+import {connect} from "react-redux";
 import "./Field.css";
 import Brush from "./Brush";
 
-const Field = () => {
+const Field = (props) => {
     const [block, setBlock] = useState(new Array(100).fill({color: "white"}));
     const [currentColor, setCurrentColor] = useState("black");
     const [colorHistory, setColorHistory] = useState([]);
@@ -60,4 +60,25 @@ const Field = () => {
         </>
     );
 };
-export default Field;
+
+const mapStateToProps = (state) => ({
+    // letters: state.letters,
+    // current: state.current.currentIndex
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    //
+    // changeLetterOnClicked: (index) => dispatch({
+    //     type: 'CHANGE_LETTER_ON_CLICKED',
+    //     payload: {
+    //         index: index
+    // //     }
+    // }),
+
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Field);
+
+
+
