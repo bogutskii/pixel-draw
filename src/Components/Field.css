@@ -23,3 +23,9 @@
   border: 1px solid;
   margin-right:2px;
 }
+.btn-brush{
+  font-size: 1vw;
+}
+.brush-block{
+  margin: 10px;
+}

@@ -1,11 +1,14 @@
 import React, {useState} from "react";
+
 import "./Field.css";
+import Brush from "./Brush";
 
 const Field = () => {
     const [block, setBlock] = useState(new Array(100).fill({color: "white"}));
     const [currentColor, setCurrentColor] = useState("black");
-    const [colorHistory, setColorHistory] = useState(["yellow"]);
-    const changePixelColor = (ind) => {
+    const [colorHistory, setColorHistory] = useState([]);
+
+    const saveToHistory = (ind) => {
         if (!colorHistory.includes(currentColor)) {
             setColorHistory([...colorHistory, currentColor]);
         }
@@ -19,18 +22,19 @@ const Field = () => {
     const changeColor = (e) => {
         setCurrentColor(e);
     };
-    const saveToHistory = (color) => {
+    const changePixelColor = (color) => {
         setCurrentColor(color);
     };
     return (
         <>
+            <Brush/>
             {/*{colorHistory.map((el,i) => <div  className='color-history' style={{background: el}}>.</div>)} */}
             <div className="colorhistory">
                 {colorHistory.map((el, i) => (
                     <div
                         className="pixelHistory"
                         style={{background: el}}
-                        onClick={() => saveToHistory(el)}
+                        onClick={() => changePixelColor(el)}
                     >
                         {" "}
                     </div>
@@ -47,7 +51,7 @@ const Field = () => {
                     <div
                         className="pixel"
                         style={{background: el.color}}
-                        onClick={() => changePixelColor(i)}
+                        onClick={() => saveToHistory(i)}
                     >
                         {i}
                     </div>
