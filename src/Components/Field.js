@@ -5,10 +5,11 @@ import Brush from "./Brush";
 
 const Field = (props) => {
     const [block, setBlock] = useState(new Array(100).fill({color: "white"}));
-    const [currentColor, setCurrentColor] = useState("black");
+    const [currentColor, setCurrentColor] = useState("#000000");
     const [colorHistory, setColorHistory] = useState([]);
 
     const saveToHistory = (ind) => {
+        console.log(ind)
         if (!colorHistory.includes(currentColor)) {
             setColorHistory([...colorHistory, currentColor]);
         }

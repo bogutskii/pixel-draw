@@ -1,8 +1,8 @@
 import "./styles.css";
 import Field from "./Components/Field.js";
+import {connect} from "react-redux";
 
-
-export default function App(props) {
+const App = (props)=> {
   return (
     <div className="App">
       <h1>Pixel</h1>
