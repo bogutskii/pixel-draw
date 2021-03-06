@@ -2,24 +2,14 @@ import React, {useState} from "react";
 import {connect} from "react-redux";
 import "./Field.css";
 import Brush from "./Brush";
+import ColorHisory from "./ColorHistory";
 
 const Field = (props) => {
-    const [block, setBlock] = useState(new Array(100).fill({color: "white"}));
-    const [currentColor, setCurrentColor] = useState("#000000");
-    const [colorHistory, setColorHistory] = useState([]);
 
-    const saveToHistory = (ind) => {
-        console.log(ind)
-        if (!colorHistory.includes(currentColor)) {
-            setColorHistory([...colorHistory, currentColor]);
-        }
-        console.log(colorHistory);
-        setBlock(
-            [...block].map((el, i) =>
-                i === ind ? {...el, color: currentColor} : el
-            )
-        );
-    };
+    const {field, currentColor} = props;
+   // const [block, setBlock] = useState(new Array(100).fill({color: "white"}));
+    //const [currentColor, setCurrentColor] = useState("#000000");
+
     const changeColor = (e) => {
         setCurrentColor(e);
     };
@@ -30,17 +20,7 @@ const Field = (props) => {
         <>
             <Brush/>
             {/*{colorHistory.map((el,i) => <div  className='color-history' style={{background: el}}>.</div>)} */}
-            <div className="colorhistory">
-                {colorHistory.map((el, i) => (
-                    <div
-                        className="pixelHistory"
-                        style={{background: el}}
-                        onClick={() => changePixelColor(el)}
-                    >
-                        {" "}
-                    </div>
-                ))}
-            </div>
+            <ColorHisory/>
             <input
                 type="color"
                 value={currentColor}
@@ -48,7 +28,7 @@ const Field = (props) => {
             />
 
             <div className="grid">
-                {block.map((el, i) => (
+                {field.map((el, i) => (
                     <div
                         className="pixel"
                         style={{background: el.color}}
@@ -63,8 +43,8 @@ const Field = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    // letters: state.letters,
-    // current: state.current.currentIndex
+    field: state.field,
+    currentColor: state.currentColor
 })
 
 const mapDispatchToProps = (dispatch) => ({

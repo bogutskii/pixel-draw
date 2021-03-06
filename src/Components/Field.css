@@ -12,12 +12,12 @@
   height: 10%;
   box-sizing: border-box;
 }
-.colorhistory {
+.color-history {
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
 }
-.pixelHistory {
+.pixel-history {
   width: 30px;
   height:30px;
   border: 1px solid;

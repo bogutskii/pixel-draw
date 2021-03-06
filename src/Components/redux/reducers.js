@@ -1,7 +1,7 @@
 
 
 const initialState = {
-    fields: [new Array(100).fill({color: "white"})],
+    field: new Array(100).fill({color: "white"}),
     pixelSize: 10,
     history:[],
     currentColor: '#000000'

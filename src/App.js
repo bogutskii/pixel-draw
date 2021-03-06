@@ -12,7 +12,7 @@ const App = (props)=> {
 }
 
 const mapStateToProps = (state) => ({
-  state: state
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
