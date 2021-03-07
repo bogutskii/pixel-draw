@@ -3,20 +3,21 @@ import {connect} from "react-redux";
 import "./Field.css";
 import Brush from "./Brush";
 import ColorHisory from "./ColorHistory";
+import FieldSize from "./FieldSize";
 
 const Field = (props) => {
 
     const {field, currentColor, changeColor, saveToHistory, changePixelColor} = props;
-    // const [block, setBlock] = useState(new Array(100).fill({color: "white"}));
-    //const [currentColor, setCurrentColor] = useState("#000000");
+
 
 
 
     return (
         <>
+            <FieldSize/>
             <Brush/>
-            {/*{colorHistory.map((el,i) => <div  className='color-history' style={{background: el}}>.</div>)} */}
             <ColorHisory/>
+
             <input
                 type="color"
                 value={currentColor}
