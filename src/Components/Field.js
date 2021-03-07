@@ -6,16 +6,12 @@ import ColorHisory from "./ColorHistory";
 
 const Field = (props) => {
 
-    const {field, currentColor} = props;
-   // const [block, setBlock] = useState(new Array(100).fill({color: "white"}));
+    const {field, currentColor, changeColor, saveToHistory, changePixelColor} = props;
+    // const [block, setBlock] = useState(new Array(100).fill({color: "white"}));
     //const [currentColor, setCurrentColor] = useState("#000000");
 
-    const changeColor = (e) => {
-        setCurrentColor(e);
-    };
-    const changePixelColor = (color) => {
-        setCurrentColor(color);
-    };
+
+
     return (
         <>
             <Brush/>
@@ -32,7 +28,7 @@ const Field = (props) => {
                     <div
                         className="pixel"
                         style={{background: el.color}}
-                        onClick={() => saveToHistory(i)}
+                        onClick={() => changePixelColor(i)}
                     >
                         {i}
                     </div>
@@ -48,13 +44,19 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    //
-    // changeLetterOnClicked: (index) => dispatch({
-    //     type: 'CHANGE_LETTER_ON_CLICKED',
-    //     payload: {
-    //         index: index
-    // //     }
-    // }),
+
+    changeColor: (color) => dispatch({
+        type: 'CHANGE_CURRENT_COLOR',
+        payload: {
+            color
+        }
+    }),
+    changePixelColor: (index) => dispatch({
+        type: 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY',
+        payload: {
+            index
+        }
+    }),
 
 })
 

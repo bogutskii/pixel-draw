@@ -1,14 +1,15 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
 
-const ColorHisory = (props) => {
+const HistoryColor = (props) => {
+const {historyColor} = props;
 
-    const [colorHistory, setColorHistory] = useState([]);
+
 
     const saveToHistory = (ind) => {
 
-        if (!colorHistory.includes(currentColor)) {
-            setColorHistory([...colorHistory, currentColor]);
+        if (!historyColor.includes(currentColor)) {
+            setColorHistory([...historyColor, currentColor]);
         }
 
         setBlock(
@@ -19,7 +20,7 @@ const ColorHisory = (props) => {
     };
 
     return <div className="color-history">
-        {colorHistory.map((el, i) => (
+        {historyColor.map((el, i) => (
             <div
                 className="pixel-history"
                 style={{background: el}}
@@ -34,7 +35,7 @@ const ColorHisory = (props) => {
 
 
 const mapStateToProps = (state) => ({
-    state: state
+    historyColor: state.historyColor
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -49,4 +50,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ColorHisory);
+export default connect(mapStateToProps, mapDispatchToProps)(HistoryColor);
