@@ -2,29 +2,17 @@ import React, {useState} from "react";
 import {connect} from "react-redux";
 
 const HistoryColor = (props) => {
-const {historyColor} = props;
+const {historyColor,changeColor} = props;
 
 
 
-    const saveToHistory = (ind) => {
-
-        if (!historyColor.includes(currentColor)) {
-            setColorHistory([...historyColor, currentColor]);
-        }
-
-        setBlock(
-            [...block].map((el, i) =>
-                i === ind ? {...el, color: currentColor} : el
-            )
-        );
-    };
 
     return <div className="color-history">
         {historyColor.map((el, i) => (
             <div
                 className="pixel-history"
                 style={{background: el}}
-                onClick={() => changePixelColor(el)}
+                onClick={() => changeColor(el)}
             >
                 {" "}
             </div>
@@ -44,6 +32,12 @@ const mapDispatchToProps = (dispatch) => ({
         type: 'CHANGE_CREATE_MODAL',
         payload: {
             value: value
+        }
+    }),
+    changeColor: (color) => dispatch({
+        type: 'CHANGE_CURRENT_COLOR',
+        payload: {
+            color
         }
     }),
 
