@@ -7,9 +7,7 @@ import FieldSize from "./FieldSize";
 
 const Field = (props) => {
 
-    const {field, currentColor, changeColor, saveToHistory, changePixelColor, clearField} = props;
-
-
+    const {field, currentColor, changeColor, saveToHistory, changePixelColor, clearField, pixelSize} = props;
 
 
     return (
@@ -17,7 +15,7 @@ const Field = (props) => {
             <FieldSize/>
             <Brush/>
             <ColorHisory/>
-<button onClick={clearField}>Clear gild</button>
+
             <input
                 type="color"
                 value={currentColor}
@@ -28,19 +26,22 @@ const Field = (props) => {
                 {field.map((el, i) => (
                     <div
                         className="pixel"
-                        style={{background: el.color}}
+                        style={{background: el.color, width: pixelSize+'%', height: pixelSize+'%'}}
                         onClick={() => changePixelColor(i)}
                     >
                         {i}
                     </div>
                 ))}
             </div>
+            <p></p>
+            <button onClick={clearField}>Clear field</button>
         </>
     );
 };
 
 const mapStateToProps = (state) => ({
     field: state.field,
+    pixelSize: state.pixelSize,
     currentColor: state.currentColor
 })
 
@@ -57,11 +58,9 @@ const mapDispatchToProps = (dispatch) => ({
         payload: {
             index
         }
-    }),   clearField: () => dispatch({
+    }), clearField: () => dispatch({
         type: 'CLEAR_FIELD',
-        payload: {
-
-        }
+        payload: {}
     }),
 
 })

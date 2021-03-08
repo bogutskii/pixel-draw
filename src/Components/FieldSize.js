@@ -3,21 +3,21 @@ import {connect} from "react-redux";
 
 
 const FieldSize = (props) => {
-    const {} = props;
+    const {currentSize,changeFieldSize} = props;
 
 
 
 
     return <div className="container">
         <div className="tabs">
-            <input type="radio" id="radio-1" name="tabs" checked/>
-            <label className="tab" htmlFor="radio-1">100<span className="notification">
-            </span></label>
-            <input type="radio" id="radio-2" name="tabs"/>
+            <input type="radio" id="radio-1" value={currentSize} onChange={(value)=>changeFieldSize(100)} checked={currentSize === 100}/>
+            <label className="tab" htmlFor="radio-1">100</label>
+
+            <input type="radio" id="radio-2"  value={currentSize} onChange={(value)=>changeFieldSize(400)} checked={currentSize === 400}/>
             <label className="tab" htmlFor="radio-2">400</label>
-            <input type="radio" id="radio-3" name="tabs"/>
+
+            <input type="radio" id="radio-3" value={currentSize} onChange={(value)=>changeFieldSize(1600)} checked={currentSize === 1600}/>
             <label className="tab" htmlFor="radio-3">1600</label>
-            <span className="glider"></span>
         </div>
     </div>
 
@@ -25,15 +25,15 @@ const FieldSize = (props) => {
 
 
 const mapStateToProps = (state) => ({
-    historyColor: state.historyColor
+    currentSize : state.currentSize
 })
 
 const mapDispatchToProps = (dispatch) => ({
 
-    changeCreateModal: (value) => dispatch({
-        type: 'CHANGE_CREATE_MODAL',
+    changeFieldSize: (size) => dispatch({
+        type: 'CHANGE_FIELD_SIZE',
         payload: {
-            value
+            size
         }
     }),
 

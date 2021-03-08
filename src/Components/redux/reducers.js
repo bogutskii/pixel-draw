@@ -28,12 +28,36 @@ const drawField = (state = initialState, action) => {
         case 'CLEAR_FIELD':
 
             return {
-                ...state, field: new Array(state.currentSize).fill({color: "white"}),
+                ...state, field: new Array(state.currentSize).fill({color: "white"})
             }
         case 'DELETE_COLOR_HISTORY':
 
             return {
                 ...state, historyColor: ['#000000']
+            }
+        case 'CHANGE_FIELD_SIZE':
+            if (action.payload.size === 100) {
+                return {
+                    ...state,
+                    field: new Array(100).fill({color: "white"}),
+                    currentSize: 100,
+                    pixelSize: 10
+                }
+            } else if (action.payload.size === 400) {
+                return {
+                    ...state,
+                    field: new Array(400).fill({color: "white"}),
+                    currentSize: 400,
+                    pixelSize: 5
+                }
+            } else if (action.payload.size === 1600) {
+                return {
+                    ...state,
+                    field: new Array(1600).fill({color: "white"}),
+                    currentSize: 1600,
+                    pixelSize: 2.5
+                }
+
             }
 
 

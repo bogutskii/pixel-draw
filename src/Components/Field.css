@@ -11,6 +11,7 @@
   width: 10%;
   height: 10%;
   box-sizing: border-box;
+  border: 1px solid purple;
 }
 .color-history {
   display: flex;

@@ -17,7 +17,7 @@ const {historyColor,changeColor,deleteColorHistory} = props;
                 {" "}
             </div>
         ))}
-        <button onClick={deleteColorHistory}>delete color history</button>
+        <button onClick={deleteColorHistory}>delete history</button>
     </div>
 
 }
