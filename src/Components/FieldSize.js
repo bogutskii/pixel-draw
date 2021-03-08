@@ -11,7 +11,8 @@ const FieldSize = (props) => {
     return <div className="container">
         <div className="tabs">
             <input type="radio" id="radio-1" name="tabs" checked/>
-            <label className="tab" htmlFor="radio-1">100<span className="notification"></span></label>
+            <label className="tab" htmlFor="radio-1">100<span className="notification">
+            </span></label>
             <input type="radio" id="radio-2" name="tabs"/>
             <label className="tab" htmlFor="radio-2">400</label>
             <input type="radio" id="radio-3" name="tabs"/>
@@ -32,7 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
     changeCreateModal: (value) => dispatch({
         type: 'CHANGE_CREATE_MODAL',
         payload: {
-            value: value
+            value
         }
     }),
 

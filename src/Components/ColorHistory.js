@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {connect} from "react-redux";
 
 const HistoryColor = (props) => {
-const {historyColor,changeColor} = props;
+const {historyColor,changeColor,deleteColorHistory} = props;
 
 
 
@@ -17,6 +17,7 @@ const {historyColor,changeColor} = props;
                 {" "}
             </div>
         ))}
+        <button onClick={deleteColorHistory}>delete color history</button>
     </div>
 
 }
@@ -27,18 +28,15 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
-    changeCreateModal: (value) => dispatch({
-        type: 'CHANGE_CREATE_MODAL',
-        payload: {
-            value: value
-        }
-    }),
     changeColor: (color) => dispatch({
         type: 'CHANGE_CURRENT_COLOR',
         payload: {
             color
         }
+    }),
+    deleteColorHistory: (color) => dispatch({
+        type: 'DELETE_COLOR_HISTORY',
+
     }),
 
 })
