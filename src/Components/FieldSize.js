@@ -19,6 +19,10 @@ const FieldSize = (props) => {
             <input type="radio" id="radio-3" value={currentSize} onChange={(value)=>changeFieldSize(1600)} checked={currentSize === 1600}/>
             <label className="tab" htmlFor="radio-3">1600</label>
         </div>
+
+
+
+
     </div>
 
 }
