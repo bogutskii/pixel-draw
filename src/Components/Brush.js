@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 
 
-const Brush = ()=>{
+const Brush = (props)=>{
     const {changeBrush} = props
     return <div className='brush-block'>
 
