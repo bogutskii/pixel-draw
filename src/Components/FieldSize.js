@@ -7,7 +7,6 @@ const FieldSize = (props) => {
 
 
 
-
     return <div className="container">
         <div className="tabs">
             <input type="radio" id="radio-1" value={currentSize} onChange={(value)=>changeFieldSize(100)} checked={currentSize === 100}/>
@@ -18,6 +17,7 @@ const FieldSize = (props) => {
 
             <input type="radio" id="radio-3" value={currentSize} onChange={(value)=>changeFieldSize(1600)} checked={currentSize === 1600}/>
             <label className="tab" htmlFor="radio-3">1600</label>
+            <span className="glider"></span>
         </div>
 
 

@@ -1,18 +1,35 @@
 import React from 'react'
+import {connect} from "react-redux";
 
 
 
 
 const Brush = ()=>{
+    const {changeBrush} = props
     return <div className='brush-block'>
 
-        <button className='btn-brush'>⊡</button>
-        <button className='btn-brush'>⭤</button>
-        <button className='btn-brush'>⭥</button>
-        <button className='btn-brush'>✚</button>
-        <button className='btn-brush'>Fill random ⊞</button>
+        <button className='btn-brush' onClick={()=> changeBrush('dot')}>⊡</button>
+        <button className='btn-brush' onClick={()=> changeBrush('horizont')}>⭤</button>
+        <button className='btn-brush' onClick={()=> changeBrush('vertical')}>⭥</button>
+        <button className='btn-brush' onClick={()=> changeBrush('cross')}>✚</button>
+        <button className='btn-brush' onClick={()=> changeBrush('random')}>Fill random ⊞</button>
 
     </div>
 }
+const mapStateToProps = (state) => ({
+   brush: state.brush
+})
 
-export default Brush;
+const mapDispatchToProps = (dispatch) => ({
+    changeBrush: (brush) => dispatch({
+        type: 'CHANGE_BRUSH',
+        payload: {
+            brush
+        }
+    }),
+
+
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Brush);

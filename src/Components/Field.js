@@ -29,7 +29,7 @@ const Field = (props) => {
                         style={{background: el.color, width: pixelSize+'%', height: pixelSize+'%'}}
                         onClick={() => changePixelColor(i)}
                     >
-                        {' '}
+                        {' '}{i}
                     </div>
                 ))}
             </div>

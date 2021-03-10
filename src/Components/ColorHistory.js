@@ -7,7 +7,8 @@ const {historyColor,changeColor,deleteColorHistory} = props;
 
 
 
-    return <div className="color-history">
+    return <div className='container'>
+    <div className="color-history">
         {historyColor.map((el, i) => (
             <div
                 className="pixel-history"
@@ -19,7 +20,7 @@ const {historyColor,changeColor,deleteColorHistory} = props;
         ))}
         <button onClick={deleteColorHistory}>delete history</button>
     </div>
-
+    </div>
 }
 
 

@@ -3,7 +3,8 @@ const initialState = {
     field: new Array(100).fill({color: "white"}),
     pixelSize: 10,
     historyColor: ['#000000'],
-    currentColor: '#000000'
+    currentColor: '#000000',
+    brush: 'dot'
 
 }
 const drawField = (state = initialState, action) => {
@@ -58,6 +59,10 @@ const drawField = (state = initialState, action) => {
                     pixelSize: 2.5
                 }
 
+            }
+        case 'CHANGE_BRUSH':
+            return {
+                ...state, brush: action.payload.brush
             }
 
 
