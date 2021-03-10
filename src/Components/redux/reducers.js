@@ -7,6 +7,11 @@ const initialState = {
     brush: 'dot'
 
 }
+
+
+
+
+
 const drawField = (state = initialState, action) => {
     switch (action.type) {
         case 'CHANGE_CURRENT_COLOR' :
@@ -19,10 +24,27 @@ const drawField = (state = initialState, action) => {
             if (!copyHistoryColor.includes(state.currentColor)) {
                 copyHistoryColor.push(state.currentColor)
             }
-            let copyField = [...state.field].map((el, i) => i === action.payload.index ? {
-                ...el,
-                color: state.currentColor
-            } : el)
+
+            const brushFill = (index, brush, size, array) => {
+                let range = [0, 9];
+                if (brush === 'horizontal') {
+                    if (index > 9) {
+
+                        let r1 = Math.floor(index/ 10) // 9
+                        range = [r1*10 , r1*10+9]
+                    }
+                }
+                return array.map((el,i)=> (i>= range[0] && i <= range[1])? {
+                    ...el,
+                    color: state.currentColor
+                } : el )
+            }
+            // let copyField = [...state.field].map((el, i) => i === action.payload.index ? {
+            //     ...el,
+            //     color: state.currentColor
+            // } : el)
+            let copyField = brushFill(action.payload.index, state.brush,state.currentSize,[...state.field])
+
             return {
                 ...state, field: copyField, historyColor: copyHistoryColor
             }
