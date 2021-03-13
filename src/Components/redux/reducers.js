@@ -51,9 +51,7 @@ const drawField = (state = initialState, action) => {
 // 100 -10
 //40 - 20
 //1600 - 40
-// 3 13  23 33
-// 43 53 63 73
-// 83 93 103 113
+
 
 
                 else {

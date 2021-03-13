@@ -6,12 +6,27 @@ import ColorHisory from "./ColorHistory";
 import FieldSize from "./FieldSize";
 
 const Field = (props) => {
+    const [continueToDraw, setContinueToDraw] = useState(false);
 
     const {field, currentColor, changeColor, saveToHistory, changePixelColor, clearField, pixelSize} = props;
 
+    const onKeyPressed = (e) => {
+        if (e.code === "Space" || e.type === "mousedown" ) {
+
+            setContinueToDraw(true);
+        }
+    };
+    const onKeyUp = (e) => {
+        if (e.code === "Space" || e.type === "mouseup") {
+            setContinueToDraw(false);
+        }
+    };
 
     return (
         <>
+
+
+
             <FieldSize/>
             <Brush/>
             <ColorHisory/>
@@ -22,14 +37,28 @@ const Field = (props) => {
                 onChange={(e) => changeColor(e.target.value)}
             />
 
-            <div className="grid">
+            <div className="grid"
+                onKeyDown={onKeyPressed}
+                onMouseDown={onKeyPressed}
+                onMouseUp = {onKeyUp}
+                onKeyUp={onKeyUp}
+                onMouseLeave={()=>setContinueToDraw(false)}
+
+                tabIndex="0"
+
+
+
+            >
                 {field.map((el, i) => (
                     <div
                         className="pixel"
                         style={{background: el.color, width: pixelSize+'%', height: pixelSize+'%'}}
                         onClick={() => changePixelColor(i)}
+                        onMouseOver= {()=>changePixelColor( continueToDraw ? i : undefined)}
+
                     >
-                        {' '}{i}
+                        {/*{' '}*/}
+                        {' '}
                     </div>
                 ))}
             </div>
