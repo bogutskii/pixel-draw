@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 
 const FieldSize = (props) => {
-    const {currentSize,changeFieldSize} = props;
+    const {currentSize, changeFieldSize} = props;
 
 
 

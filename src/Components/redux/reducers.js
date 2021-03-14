@@ -1,6 +1,6 @@
 const initialState = {
     currentSize: 100,
-    field: new Array(100).fill({color: "white"}),
+    field: new Array(100).fill({color: "#ffffff"}),
     pixelSize: 10,
     historyColor: ['#000000'],
     currentColor: '#000000',
@@ -25,35 +25,39 @@ const drawField = (state = initialState, action) => {
             const brushFill = (index, brush, size, array) => {
                 let range = [0, 9];
                 if (brush === 'horizontal') {
-                    if (index > 9) {
-                        let r1 = Math.floor(index / 10) // 9
-                        range = [r1 * 10, r1 * 10 + 9]
+
+                    if (size === 100) {
+                        if (index > 9) {
+                            let r1 = Math.floor(index / 10) // 9
+                            range = [r1 * 10, r1 * 10 + 9]
+                        }else if (size === 400) {
+                            let r2 = Math.floor(index / 20) // 9
+                        }
+
                     }
+
+
+
                 } else if (brush === 'vertical') {
                     let chekList = []
                     let part = 10
                     if (size === 400) {
                         part = 20
-                    } else if (size === 1600) {
+                    }else if (size === 1600) {
                         part = 40
                     }
                     let p1 = index%part
                     for (let i = 0; i < part; i++) {
-    chekList.push(p1+ (i * part))
+                        chekList.push(p1+ (i * part))
                     }
                     return array.map((el, i) => chekList.includes(i) ? {
                         ...el,
                         color: state.currentColor
                     } : el)
+                } else if(brush === 'fill'){
+                    range = [0, state.field.length]
+
                 }
-
-
-// 100 -10
-//40 - 20
-//1600 - 40
-
-
-
                 else {
                     range = [index, index]
                 }

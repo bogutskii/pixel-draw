@@ -38,12 +38,11 @@ const Field = (props) => {
             />
 
             <div className="grid"
-                onKeyDown={onKeyPressed}
+                //onKeyDown={onKeyPressed}
                 onMouseDown={onKeyPressed}
                 onMouseUp = {onKeyUp}
-                onKeyUp={onKeyUp}
+                //onKeyUp={onKeyUp}
                 onMouseLeave={()=>setContinueToDraw(false)}
-
                 tabIndex="0"
 
 
@@ -58,7 +57,7 @@ const Field = (props) => {
 
                     >
                         {/*{' '}*/}
-                        {' '}
+                        {' '}{i}
                     </div>
                 ))}
             </div>
