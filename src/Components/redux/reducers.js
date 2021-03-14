@@ -27,15 +27,17 @@ const drawField = (state = initialState, action) => {
                 if (brush === 'horizontal') {
 
                     if (size === 100) {
-                        if (index > 9) {
                             let r1 = Math.floor(index / 10) // 9
                             range = [r1 * 10, r1 * 10 + 9]
-                        }else if (size === 400) {
-                            let r2 = Math.floor(index / 20) // 9
-                        }
 
+
+                    } else if (size === 400) {
+                        let r2 = Math.floor(index / 20) // 9
+                        range = [r2 * 20, r2 * 20 + 19]
+                    }else if (size === 1600) {
+                        let r2 = Math.floor(index / 40) // 9
+                        range = [r2 * 40, r2 * 40 + 39]
                     }
-
 
 
                 } else if (brush === 'vertical') {
@@ -55,7 +57,7 @@ const drawField = (state = initialState, action) => {
                         color: state.currentColor
                     } : el)
                 } else if(brush === 'fill'){
-                    range = [0, state.field.length]
+                    range = [0, state.currentSize-1]
 
                 }
                 else {

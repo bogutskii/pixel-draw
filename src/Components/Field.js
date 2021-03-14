@@ -14,12 +14,14 @@ const Field = (props) => {
         if (e.code === "Space" || e.type === "mousedown" ) {
 
             setContinueToDraw(true);
+            console.log('pres')
         }
     };
     const onKeyUp = (e) => {
         if (e.code === "Space" || e.type === "mouseup") {
             setContinueToDraw(false);
         }
+        console.log('up')
     };
 
     return (
@@ -57,7 +59,7 @@ const Field = (props) => {
 
                     >
                         {/*{' '}*/}
-                        {' '}{i}
+                        {' '}
                     </div>
                 ))}
             </div>
