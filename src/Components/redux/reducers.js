@@ -121,23 +121,30 @@ const drawField = (state = initialState, action) => {
                 }
 
             }
-        case
-        'CHANGE_BRUSH'
+        case  'CHANGE_BRUSH'
         :
             return {
                 ...state, brush: action.payload.brush
             }
 
-        case
-        'ADD_DRAW_TO_HISTORY'
+        case  'ADD_DRAW_TO_HISTORY'
         :
             return {
                 ...state, drawHistory: [...state.drawHistory,
                     {
                         name: action.payload.name,
                         size: state.currentSize,
-                        pixelSize: state.pixelSize
+                        pixelSize: state.pixelSize,
+                        field: state.field
                     }]
+            }
+        case 'GET_DRAW_FROM_HISTORY'
+        :
+            return {
+                ...state,
+                        currentSize: state.drawHistory[action.payload.index].currentSize,
+                        field: state.drawHistory[action.payload.index].field,
+                        pixelSize: state.drawHistory[action.payload.index].pixelSize,
             }
 
 
