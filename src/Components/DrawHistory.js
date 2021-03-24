@@ -6,9 +6,10 @@ const DrawHistory = (props) => {
     const {historyList, addToHistory} = props
 
     const saveNameInList = () => {
-    if(name){
-        addToHistory(name)
-    }
+        if (name && !historyList.some(el => el.name === name)) {
+            addToHistory(name)
+            setName('')
+        }
     }
     return <div>
 
