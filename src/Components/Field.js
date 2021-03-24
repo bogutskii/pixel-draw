@@ -4,6 +4,7 @@ import "./Field.css";
 import Brush from "./Brush";
 import ColorHisory from "./ColorHistory";
 import FieldSize from "./FieldSize";
+import DrawHistory from "./DrawHistory";
 
 const Field = (props) => {
     const [continueToDraw, setContinueToDraw] = useState(false);
@@ -11,7 +12,7 @@ const Field = (props) => {
     const {field, currentColor, changeColor, saveToHistory, changePixelColor, clearField, pixelSize} = props;
 
     const onKeyPressed = (e) => {
-        if (e.code === "Space" || e.type === "mousedown" ) {
+        if (e.code === "Space" || e.type === "mousedown") {
 
             setContinueToDraw(true);
             console.log('pres')
@@ -27,12 +28,10 @@ const Field = (props) => {
     return (
         <>
 
-
-
             <FieldSize/>
             <Brush/>
             <ColorHisory/>
-
+            <DrawHistory/>
             <input
                 type="color"
                 value={currentColor}
@@ -41,21 +40,19 @@ const Field = (props) => {
 
             <div className="grid"
                 //onKeyDown={onKeyPressed}
-                onMouseDown={onKeyPressed}
-                onMouseUp = {onKeyUp}
+                 onMouseDown={onKeyPressed}
+                 onMouseUp={onKeyUp}
                 //onKeyUp={onKeyUp}
-                onMouseLeave={()=>setContinueToDraw(false)}
-                tabIndex="0"
-
-
+                 onMouseLeave={() => setContinueToDraw(false)}
+                 tabIndex="0"
 
             >
                 {field.map((el, i) => (
                     <div
                         className="pixel"
-                        style={{background: el.color, width: pixelSize+'%', height: pixelSize+'%'}}
+                        style={{background: el.color, width: pixelSize + '%', height: pixelSize + '%'}}
                         onClick={() => changePixelColor(i)}
-                        onMouseOver= {()=>changePixelColor( continueToDraw ? i : undefined)}
+                        onMouseOver={() => changePixelColor(continueToDraw ? i : undefined)}
 
                     >
                         {/*{' '}*/}
