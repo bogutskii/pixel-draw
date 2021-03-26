@@ -12,7 +12,7 @@
     width: 10%;
     height: 10%;
     box-sizing: border-box;
-    border: 1px solid lavenderblush;
+
 }
 
 .color-history {
@@ -52,7 +52,6 @@ body {
     justify-content: center;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 .tabs {
     display: flex;

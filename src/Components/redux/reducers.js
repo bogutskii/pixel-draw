@@ -69,11 +69,6 @@ const drawField = (state = initialState, action) => {
                 } : el)
             }
 
-
-            // let copyField = [...state.field].map((el, i) => i === action.payload.index ? {
-            //     ...el,
-            //     color: state.currentColor
-            // } : el)
             let copyField = brushFill(action.payload.index, state.brush, state.currentSize, [...state.field])
 
             return {
@@ -119,15 +114,19 @@ const drawField = (state = initialState, action) => {
                     currentSize: 1600,
                     pixelSize: 2.5
                 }
-
+            } else {
+                return state
             }
-        case  'CHANGE_BRUSH'
+
+        case
+        'CHANGE_BRUSH'
         :
             return {
                 ...state, brush: action.payload.brush
             }
 
-        case  'ADD_DRAW_TO_HISTORY'
+        case
+        'ADD_DRAW_TO_HISTORY'
         :
             return {
                 ...state, drawHistory: [...state.drawHistory,
@@ -138,13 +137,14 @@ const drawField = (state = initialState, action) => {
                         field: state.field
                     }]
             }
-        case 'GET_DRAW_FROM_HISTORY'
+        case
+        'GET_DRAW_FROM_HISTORY'
         :
             return {
                 ...state,
-                        currentSize: state.drawHistory[action.payload.index].currentSize,
-                        field: state.drawHistory[action.payload.index].field,
-                        pixelSize: state.drawHistory[action.payload.index].pixelSize,
+                currentSize: state.drawHistory[action.payload.index].currentSize,
+                field: state.drawHistory[action.payload.index].field,
+                pixelSize: state.drawHistory[action.payload.index].pixelSize,
             }
 
 

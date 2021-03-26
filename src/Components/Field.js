@@ -8,8 +8,9 @@ import DrawHistory from "./DrawHistory";
 
 const Field = (props) => {
     const [continueToDraw, setContinueToDraw] = useState(false);
+    const [gridMap, setGridMap] = useState(true);
 
-    const {field, currentColor, changeColor, saveToHistory, changePixelColor, clearField, pixelSize} = props;
+    const {field, currentColor, changeColor, changePixelColor, clearField, pixelSize} = props;
 
     const onKeyPressed = (e) => {
         if (e.code === "Space" || e.type === "mousedown") {
@@ -32,11 +33,23 @@ const Field = (props) => {
             <Brush/>
             <ColorHisory/>
             <DrawHistory/>
+
             <input
                 type="color"
                 value={currentColor}
                 onChange={(e) => changeColor(e.target.value)}
             />
+            <div className="grid-Map mg-10">
+                <div>
+                    <input
+                        type="checkbox"
+                        value={gridMap}
+                        checked={gridMap}
+                        onChange={() => setGridMap(!gridMap)}
+                    />
+                    <label htmlFor="border">Grid Map</label>
+                </div>
+            </div>
 
             <div className="grid"
                 //onKeyDown={onKeyPressed}
@@ -50,7 +63,12 @@ const Field = (props) => {
                 {field.map((el, i) => (
                     <div
                         className="pixel"
-                        style={{background: el.color, width: pixelSize + '%', height: pixelSize + '%'}}
+                        style={{
+                            background: el.color,
+                            width: pixelSize + '%',
+                            height: pixelSize + '%',
+                            border: gridMap ? "1px solid lightgrey" : ""
+                        }}
                         onClick={() => changePixelColor(i)}
                         onMouseOver={() => changePixelColor(continueToDraw ? i : undefined)}
 
@@ -60,7 +78,7 @@ const Field = (props) => {
                     </div>
                 ))}
             </div>
-            <p></p>
+
             <button onClick={clearField}>Clear field</button>
         </>
     );
