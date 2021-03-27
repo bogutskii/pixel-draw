@@ -13,11 +13,16 @@ const DrawHistory = (props) => {
   };
   return (
     <div>
-      <select size="5">
+      <ul>
         {historyList.map((el, i) => (
-          <option onClick={() => getFromHistory(el.name, i)}>{el.name}</option>
+          <li className="draw-history-item" onClick={() => getFromHistory(el.name, i)}>
+            {el.name}
+
+            <button>delete</button>
+            <button>re-Save</button>
+          </li>
         ))}
-      </select>
+      </ul>
       <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
       <button onClick={saveNameInList}>save</button>
     </div>
