@@ -25,30 +25,12 @@ const drawField = (state = initialState, action) => {
       const brushFill = (index, brush, size, array) => {
         let range = [0, 9];
         if (brush === 'horizontal') {
-          if (size === 100) {
-            let r1 = Math.floor(index / 10); // 9
-            range = [r1 * 10, r1 * 10 + 9];
-          } else if (size === 400) {
-            let r2 = Math.floor(index / 20); // 9
-            range = [r2 * 20, r2 * 20 + 19];
-          } else if (size === 1600) {
-            let r2 = Math.floor(index / 40); // 9
-            range = [r2 * 40, r2 * 40 + 39];
-          }
+          range = vertical(index, brush, size, array, state);
         } else if (brush === 'vertical') {
-          let chekList = [];
-          let part = 10;
-          if (size === 400) {
-            part = 20;
-          } else if (size === 1600) {
-            part = 40;
-          }
-          let p1 = index % part;
-          for (let i = 0; i < part; i++) {
-            chekList.push(p1 + i * part);
-          }
-          return array.map((el, i) =>
-            chekList.includes(i)
+          let res = horizontal(index, brush, size, array);
+
+          return res[0].map((el, i) =>
+            res[1].includes(i)
               ? {
                   ...el,
                   color: state.currentColor,
@@ -150,4 +132,32 @@ const drawField = (state = initialState, action) => {
       return state;
   }
 };
+
+const vertical = (index, brush, size, array, state) => {
+  if (size === 100) {
+    let r1 = Math.floor(index / 10); // 9
+    return [r1 * 10, r1 * 10 + 9];
+  } else if (size === 400) {
+    let r2 = Math.floor(index / 20); // 9
+    return [r2 * 20, r2 * 20 + 19];
+  } else if (size === 1600) {
+    let r2 = Math.floor(index / 40); // 9
+    return [r2 * 40, r2 * 40 + 39];
+  }
+};
+const horizontal = (index, brush, size, array) => {
+  let chekList = [];
+  let part = 10;
+  if (size === 400) {
+    part = 20;
+  } else if (size === 1600) {
+    part = 40;
+  }
+  let p1 = index % part;
+  for (let i = 0; i < part; i++) {
+    chekList.push(p1 + i * part);
+  }
+  return [array, chekList];
+};
+
 export default drawField;
