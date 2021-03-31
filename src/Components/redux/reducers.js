@@ -23,28 +23,24 @@ const drawField = (state = initialState, action) => {
       }
 
       const brushFill = (index, brush, size, array) => {
-        let range = [0, 9];
+        let range = [];
+        let checkList = [];
         if (brush === 'horizontal') {
-          range = vertical(index, brush, size, array, state);
+          range = horizontal(index, brush, size);
         } else if (brush === 'vertical') {
-          let res = horizontal(index, brush, size, array);
-
-          return res[0].map((el, i) =>
-            res[1].includes(i)
-              ? {
-                  ...el,
-                  color: state.currentColor,
-                }
-              : el,
-          );
+          checkList = vertical(index, brush, size);
         } else if (brush === 'fill') {
           range = [0, state.currentSize - 1];
+        } else if (brush === 'cross') {
+          range = horizontal(index, brush, size);
+          checkList = vertical(index, brush, size);
         } else {
           range = [index, index];
         }
 
         return array.map((el, i) =>
-          i >= range[0] && i <= range[1]
+          (i >= range[0] && i <= range[1]) ||
+          (checkList.includes(i) && checkList.length > 0)
             ? {
                 ...el,
                 color: state.currentColor,
@@ -133,7 +129,7 @@ const drawField = (state = initialState, action) => {
   }
 };
 
-const vertical = (index, brush, size, array, state) => {
+const horizontal = (index, brush, size) => {
   if (size === 100) {
     let r1 = Math.floor(index / 10); // 9
     return [r1 * 10, r1 * 10 + 9];
@@ -145,8 +141,8 @@ const vertical = (index, brush, size, array, state) => {
     return [r2 * 40, r2 * 40 + 39];
   }
 };
-const horizontal = (index, brush, size, array) => {
-  let chekList = [];
+const vertical = (index, brush, size) => {
+  let chList = [];
   let part = 10;
   if (size === 400) {
     part = 20;
@@ -155,9 +151,9 @@ const horizontal = (index, brush, size, array) => {
   }
   let p1 = index % part;
   for (let i = 0; i < part; i++) {
-    chekList.push(p1 + i * part);
+    chList.push(p1 + i * part);
   }
-  return [array, chekList];
+  return chList;
 };
 
 export default drawField;
