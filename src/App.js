@@ -14,13 +14,13 @@ const App = (props) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCreateModal: (value) =>
-    dispatch({
-      type: 'CHANGE_CREATE_MODAL',
-      payload: {
-        value: value,
-      },
-    }),
+  // changeCreateModal: (value) =>
+  //   dispatch({
+  //     type: 'CHANGE_CREATE_MODAL',
+  //     payload: {
+  //       value: value,
+  //     },
+  //   }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

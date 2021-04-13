@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const Brush = (props) => {
-  const { changeBrush } = props;
+  const { changeBrush, fieldRandomBrush } = props;
   return (
     <div className="brush-block">
       <button className="btn-brush" onClick={() => changeBrush('dot')}>
@@ -20,7 +20,7 @@ const Brush = (props) => {
       <button className="btn-brush" onClick={() => changeBrush('fill')}>
         Fill ▩
       </button>
-      <button className="btn-brush" onClick={() => changeBrush('random')}>
+      <button className="btn-brush" onClick={fieldRandomBrush}>
         Fill random ⊞
       </button>
     </div>
@@ -38,6 +38,22 @@ const mapDispatchToProps = (dispatch) => ({
         brush,
       },
     }),
+  fieldRandomBrush: () =>
+    dispatch({
+      type: 'FILL_RANDOM_BRUSH',
+      payload: {},
+    }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Brush);
+//fieldRandomBrush('random')
+// const mapStateToProps = (state) => ({
+//   brush: state.brush,
+// });
+//
+
+//   fieldRandomBrush: () =>
+//     dispatch({
+//       type: 'FILL_RANDOM_BRUSH',
+//       payload: {},
+//     }),

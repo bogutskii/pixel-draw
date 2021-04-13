@@ -1,8 +1,8 @@
 const initialState = {
   currentSize: 100,
-  field: new Array(100).fill({ color: '#ffffff' }),
+  field: [...new Array(100).fill({ color: '#ffffff' })],
   pixelSize: 10,
-  historyColor: ['#000000'],
+  historyColor: ['#ffffff', '#000000'],
   currentColor: '#000000',
   brush: 'dot',
   drawHistory: [],
@@ -17,6 +17,7 @@ const drawField = (state = initialState, action) => {
       };
     // ******** START DRAW FUNCTIONAL **********************
     case 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY':
+      let copyField;
       let copyHistoryColor = [...state.historyColor];
       if (!copyHistoryColor.includes(state.currentColor)) {
         copyHistoryColor.push(state.currentColor);
@@ -26,18 +27,17 @@ const drawField = (state = initialState, action) => {
         let range = [];
         let checkList = [];
         if (brush === 'horizontal') {
-          range = horizontal(index, brush, size);
+          range = horizontal(index, size);
         } else if (brush === 'vertical') {
-          checkList = vertical(index, brush, size);
+          checkList = vertical(index, size);
         } else if (brush === 'fill') {
           range = [0, state.currentSize - 1];
         } else if (brush === 'cross') {
-          range = horizontal(index, brush, size);
-          checkList = vertical(index, brush, size);
+          range = horizontal(index, size);
+          checkList = vertical(index, size);
         } else {
           range = [index, index];
         }
-
         return array.map((el, i) =>
           (i >= range[0] && i <= range[1]) ||
           (checkList.includes(i) && checkList.length > 0)
@@ -49,10 +49,9 @@ const drawField = (state = initialState, action) => {
         );
       };
 
-      let copyField = brushFill(action.payload.index, state.brush, state.currentSize, [
+      copyField = brushFill(action.payload.index, state.brush, state.currentSize, [
         ...state.field,
       ]);
-
       return {
         ...state,
         field: copyField,
@@ -123,13 +122,28 @@ const drawField = (state = initialState, action) => {
         field: state.drawHistory[action.payload.index].field,
         pixelSize: state.drawHistory[action.payload.index].pixelSize,
       };
-
+    case 'FILL_RANDOM_BRUSH':
+      const lnHistory = state.historyColor.length;
+      const rand = () => {
+        Math.floor(Math.random() * lnHistory);
+      };
+      let randomField = state.field.map(function (el) {
+        return {
+          ...el,
+          color: state.historyColor[Math.floor(Math.random() * lnHistory)],
+        };
+      });
+      console.log(rand, randomField);
+      return {
+        ...state,
+        field: randomField,
+      };
     default:
       return state;
   }
 };
 
-const horizontal = (index, brush, size) => {
+const horizontal = (index, size) => {
   if (size === 100) {
     let r1 = Math.floor(index / 10); // 9
     return [r1 * 10, r1 * 10 + 9];
@@ -141,7 +155,7 @@ const horizontal = (index, brush, size) => {
     return [r2 * 40, r2 * 40 + 39];
   }
 };
-const vertical = (index, brush, size) => {
+const vertical = (index, size) => {
   let chList = [];
   let part = 10;
   if (size === 400) {
