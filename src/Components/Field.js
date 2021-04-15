@@ -38,22 +38,33 @@ const Field = (props) => {
       <Brush />
       <ColorHisory />
       <DrawHistory />
-
       <input
         type="color"
         value={currentColor}
         onChange={(e) => changeColor(e.target.value)}
       />
-      <div className="grid-Map mg-10">
-        <div>
+      {/*<div className="grid-Map mg-10">*/}
+      {/*  <div>*/}
+      {/*    <input*/}
+      {/*      type="checkbox"*/}
+      {/*      value={gridMap}*/}
+      {/*      checked={gridMap}*/}
+      {/*      onChange={() => setGridMap(!gridMap)}*/}
+      {/*    />*/}
+      {/*    <label htmlFor="border">Grid Map</label>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
+      <div className="grid-Map mg-10 vert-middle">
+        <label className="switch">
           <input
             type="checkbox"
             value={gridMap}
             checked={gridMap}
             onChange={() => setGridMap(!gridMap)}
           />
-          <label htmlFor="border">Grid Map</label>
-        </div>
+          <span className="slider"></span>
+        </label>
+        Grid Map
       </div>
 
       <div
