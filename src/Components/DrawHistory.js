@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { getDraws } from '../Components/redux/actions';
 
 const DrawHistory = (props) => {
+  useEffect(() => {
+    props.getDraws();
+  }, []);
   const [name, setName] = useState('');
   const { historyList, addToHistory, getFromHistory } = props;
 
@@ -49,6 +53,7 @@ const mapDispatchToProps = (dispatch) => ({
         index,
       },
     }),
+  getDraws: () => dispatch(getDraws()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrawHistory);

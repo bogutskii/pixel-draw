@@ -122,6 +122,10 @@ const drawField = (state = initialState, action) => {
         field: state.drawHistory[action.payload.index].field,
         pixelSize: state.drawHistory[action.payload.index].pixelSize,
       };
+
+    case 'GET_DRAWS_FROM_SERVER':
+      return { ...state, drawHistory: action.payload };
+
     case 'FILL_RANDOM_BRUSH':
       const lnHistory = state.historyColor.length;
       const rand = () => {
