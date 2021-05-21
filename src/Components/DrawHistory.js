@@ -1,25 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { getDraws } from '../Components/redux/actions';
+import { getDraws, addDrawToHistory } from '../Components/redux/actions';
+import { v4 as uuidv4 } from 'uuid';
 
 const DrawHistory = (props) => {
   useEffect(() => {
     props.getDraws();
   }, []);
-  const [name, setName] = useState('');
-  const { historyList, addToHistory, getFromHistory } = props;
+
+  // useEffect(() => {
+  //   props.addDrawToHistory(historyList);
+  // }, []);
+
+  const [inputName, setInputName] = useState('');
+  const {
+    historyList,
+    setDrawHistory,
+    getFromHistory,
+    pixelSize,
+    field,
+    fieldSize,
+  } = props;
+
+  const addDrawToHistoryButtonHandler = () => {
+    let newDraw = {
+      name: inputName,
+      field: field,
+      pixelSize: pixelSize,
+      fieldSize: fieldSize,
+      username: 'Admin',
+    };
+    props.addDrawToHistory(newDraw);
+  };
 
   const saveNameInList = () => {
-    if (name && !historyList.some((el) => el.name === name)) {
-      addToHistory(name);
-      setName('');
+    if (inputName && !historyList.some((el) => el.name === inputName)) {
+      addDrawToHistoryButtonHandler();
+      setInputName('');
     }
   };
   return (
     <div>
       <ul>
         {historyList.map((el, i) => (
-          <li className="draw-history-item" onClick={() => getFromHistory(el.name, i)}>
+          <li
+            className="draw-history-item"
+            key={uuidv4()}
+            onClick={() => getFromHistory(el.name, i)}
+          >
             {el.name}
 
             <button>delete</button>
@@ -27,23 +55,29 @@ const DrawHistory = (props) => {
           </li>
         ))}
       </ul>
-      <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+      <input
+        type="text"
+        value={inputName}
+        onChange={(e) => setInputName(e.target.value)}
+      />
       <button onClick={saveNameInList}>save</button>
     </div>
   );
 };
-
 const mapStateToProps = (state) => ({
   historyList: state.drawHistory,
+  field: state.field,
+  pixelSize: state.pixelSize,
+  fieldSize: state.fieldSize,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addToHistory: (name) =>
+  addDrawToHistory: (newDraw) => dispatch(addDrawToHistory(newDraw)),
+  getDraws: () => dispatch(getDraws()),
+  setDrawHistory: (historyTitle) =>
     dispatch({
-      type: 'ADD_DRAW_TO_HISTORY',
-      payload: {
-        name,
-      },
+      type: 'SAVE_HISTORY_TITLE',
+      payload: { historyTitle },
     }),
   getFromHistory: (name, index) =>
     dispatch({
@@ -53,7 +87,6 @@ const mapDispatchToProps = (dispatch) => ({
         index,
       },
     }),
-  getDraws: () => dispatch(getDraws()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrawHistory);

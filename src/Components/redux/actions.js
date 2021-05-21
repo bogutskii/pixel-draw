@@ -3,11 +3,25 @@ import axios from 'axios';
 export function getDraws() {
   return (dispatch) => {
     axios
-      .get('http://localhost:5000/draw')
+      .get('https://draw-pixel-server.herokuapp.com/draw')
       .then((res) => {
         dispatch({
           type: 'GET_DRAWS_FROM_SERVER',
           payload: res.data,
+        });
+      })
+      .catch((err) => err);
+  };
+}
+
+export function addDrawToHistory(newDraw) {
+  return (dispatch) => {
+    axios
+      .post('https://draw-pixel-server.herokuapp.com/draw', newDraw)
+      .then((res) => {
+        dispatch({
+          type: 'ADD_DRAW_TO_HISTORY',
+          payload: newDraw,
         });
       })
       .catch((err) => err);

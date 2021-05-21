@@ -5,6 +5,7 @@ import Brush from './Brush';
 import ColorHisory from './ColorHistory';
 import FieldSize from './FieldSize';
 import DrawHistory from './DrawHistory';
+import { v4 as uuidv4 } from 'uuid';
 
 const Field = (props) => {
   const [continueToDraw, setContinueToDraw] = useState(false);
@@ -43,17 +44,7 @@ const Field = (props) => {
         value={currentColor}
         onChange={(e) => changeColor(e.target.value)}
       />
-      {/*<div className="grid-Map mg-10">*/}
-      {/*  <div>*/}
-      {/*    <input*/}
-      {/*      type="checkbox"*/}
-      {/*      value={gridMap}*/}
-      {/*      checked={gridMap}*/}
-      {/*      onChange={() => setGridMap(!gridMap)}*/}
-      {/*    />*/}
-      {/*    <label htmlFor="border">Grid Map</label>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
+
       <div className="grid-Map mg-10 vert-middle">
         <label className="switch">
           <input
@@ -79,6 +70,7 @@ const Field = (props) => {
         {field.map((el, i) => (
           <div
             className="pixel"
+            key={i}
             style={{
               background: el.color,
               width: pixelSize + '%',
@@ -88,7 +80,7 @@ const Field = (props) => {
             onClick={() => changePixelColor(i)}
             onMouseOver={() => changePixelColor(continueToDraw ? i : undefined)}
           >
-            {/*{' '}*/}{' '}
+            {' '}
           </div>
         ))}
       </div>

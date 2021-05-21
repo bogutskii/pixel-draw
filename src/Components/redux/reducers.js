@@ -1,5 +1,5 @@
 const initialState = {
-  currentSize: 100,
+  fieldSize: 100,
   field: [...new Array(100).fill({ color: '#ffffff' })],
   pixelSize: 10,
   historyColor: ['#ffffff', '#000000'],
@@ -19,9 +19,6 @@ const drawField = (state = initialState, action) => {
     case 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY':
       let copyField;
       let copyHistoryColor = [...state.historyColor];
-      if (!copyHistoryColor.includes(state.currentColor)) {
-        copyHistoryColor.push(state.currentColor);
-      }
 
       const brushFill = (index, brush, size, array) => {
         let range = [];
@@ -31,7 +28,7 @@ const drawField = (state = initialState, action) => {
         } else if (brush === 'vertical') {
           checkList = vertical(index, size);
         } else if (brush === 'fill') {
-          range = [0, state.currentSize - 1];
+          range = [0, state.fieldSize - 1];
         } else if (brush === 'cross') {
           range = horizontal(index, size);
           checkList = vertical(index, size);
@@ -49,7 +46,7 @@ const drawField = (state = initialState, action) => {
         );
       };
 
-      copyField = brushFill(action.payload.index, state.brush, state.currentSize, [
+      copyField = brushFill(action.payload.index, state.brush, state.fieldSize, [
         ...state.field,
       ]);
       return {
@@ -62,7 +59,7 @@ const drawField = (state = initialState, action) => {
     case 'CLEAR_FIELD':
       return {
         ...state,
-        field: new Array(state.currentSize).fill({ color: 'white' }),
+        field: new Array(state.fieldSize).fill({ color: 'white' }),
         brush: 'dot',
       };
     case 'DELETE_COLOR_HISTORY':
@@ -75,21 +72,21 @@ const drawField = (state = initialState, action) => {
         return {
           ...state,
           field: new Array(100).fill({ color: 'white' }),
-          currentSize: 100,
+          fieldSize: 100,
           pixelSize: 10,
         };
       } else if (action.payload.size === 400) {
         return {
           ...state,
           field: new Array(400).fill({ color: 'white' }),
-          currentSize: 400,
+          fieldSize: 400,
           pixelSize: 5,
         };
       } else if (action.payload.size === 1600) {
         return {
           ...state,
           field: new Array(1600).fill({ color: 'white' }),
-          currentSize: 1600,
+          fieldSize: 1600,
           pixelSize: 2.5,
         };
       } else {
@@ -105,20 +102,12 @@ const drawField = (state = initialState, action) => {
     case 'ADD_DRAW_TO_HISTORY':
       return {
         ...state,
-        drawHistory: [
-          ...state.drawHistory,
-          {
-            name: action.payload.name,
-            size: state.currentSize,
-            pixelSize: state.pixelSize,
-            field: state.field,
-          },
-        ],
+        drawHistory: [...state.drawHistory, action.payload],
       };
     case 'GET_DRAW_FROM_HISTORY':
       return {
         ...state,
-        currentSize: state.drawHistory[action.payload.index].currentSize,
+        fieldSize: state.drawHistory[action.payload.index].currentSize,
         field: state.drawHistory[action.payload.index].field,
         pixelSize: state.drawHistory[action.payload.index].pixelSize,
       };

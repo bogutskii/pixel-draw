@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 const HistoryColor = (props) => {
   const { historyColor, changeColor, deleteColorHistory } = props;
@@ -9,6 +10,7 @@ const HistoryColor = (props) => {
       <div className="color-history">
         {historyColor.map((el, i) => (
           <div
+            key={uuidv4()}
             className="pixel-history"
             style={{ background: el }}
             onClick={() => changeColor(el)}
