@@ -19,6 +19,7 @@ export function addDrawToHistory(newDraw) {
     axios
       .post('https://draw-pixel-server.herokuapp.com/draw', newDraw)
       .then((res) => {
+        console.log(res);
         dispatch({
           type: 'ADD_DRAW_TO_HISTORY',
           payload: newDraw,

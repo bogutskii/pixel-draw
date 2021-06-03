@@ -54,3 +54,60 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 /* checkbox square slider end */
+
+/*list history */
+.drawHistory{
+  margin: 0 auto;
+  width: 50%;
+}
+.mg-10 {
+  margin: 10px;
+}
+
+.select-form {
+  width: 100px;
+  height: 100px;
+
+}
+
+.list-li{
+  background: rgb(241, 253, 255);
+  border: 1px solid rgb(171, 189, 189);
+  padding: 4px 5px;
+  margin: 5px 3px 5px ;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.list-li:hover{
+  background: rgba(210, 237, 245, 0.44);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+
+}
+.list-li:active{
+  background: rgb(250, 242, 137);
+  border: 1px solid rgb(111, 71, 255);
+}
+
+.list-wrap{
+  width: 200px;
+}
+.item_wrap{
+  display:flex;
+  justify-content: space-between;
+
+}
+.btn{
+  color:white;
+  border:none;
+  background-color:rgba(225, 53, 53, 0.871);
+  border-radius:5px;
+
+}
+.child-grow{
+  flex-grow:1
+}
+
+.list-ul{
+  list-style-type: none;
+}

@@ -105,12 +105,7 @@ const drawField = (state = initialState, action) => {
         drawHistory: [...state.drawHistory, action.payload],
       };
     case 'GET_DRAW_FROM_HISTORY':
-      return {
-        ...state,
-        fieldSize: state.drawHistory[action.payload.index].currentSize,
-        field: state.drawHistory[action.payload.index].field,
-        pixelSize: state.drawHistory[action.payload.index].pixelSize,
-      };
+      return { ...state, ...state.drawHistory[action.payload.index] };
 
     case 'GET_DRAWS_FROM_SERVER':
       return { ...state, drawHistory: action.payload };
