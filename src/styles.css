@@ -85,8 +85,8 @@ input:checked + .slider:before {
 
 }
 .list-li:active{
-  background: rgb(250, 242, 137);
-  border: 1px solid rgb(111, 71, 255);
+  background: rgb(230, 248, 255);
+  border: 1px solid rgb(6, 172, 213);
 }
 
 .list-wrap{
@@ -100,7 +100,7 @@ input:checked + .slider:before {
 .btn{
   color:white;
   border:none;
-  background-color:rgba(225, 53, 53, 0.871);
+  background-color: rgba(239, 115, 115, 0.87);
   border-radius:5px;
 
 }

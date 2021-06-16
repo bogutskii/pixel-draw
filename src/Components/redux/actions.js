@@ -19,10 +19,23 @@ export function addDrawToHistory(newDraw) {
     axios
       .post('https://draw-pixel-server.herokuapp.com/draw', newDraw)
       .then((res) => {
-        console.log(res);
         dispatch({
           type: 'ADD_DRAW_TO_HISTORY',
           payload: newDraw,
+        });
+      })
+      .catch((err) => err);
+  };
+}
+
+export function deleteDraw(id) {
+  return (dispatch) => {
+    axios
+      .delete(`https://draw-pixel-server.herokuapp.com/draw/${id}`)
+      .then((res) => {
+        dispatch({
+          type: 'DELETE_DRAW_FROM_HISTORY',
+          payload: id,
         });
       })
       .catch((err) => err);

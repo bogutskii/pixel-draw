@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { getDraws, addDrawToHistory } from '../Components/redux/actions';
+import { getDraws, addDrawToHistory, deleteDraw } from '../Components/redux/actions';
 import { v4 as uuidv4 } from 'uuid';
 
 const DrawHistory = (props) => {
@@ -13,15 +13,7 @@ const DrawHistory = (props) => {
   // }, []);
 
   const [inputName, setInputName] = useState('');
-  const {
-    historyList,
-    setDrawHistory,
-    getFromHistory,
-    pixelSize,
-    field,
-    fieldSize,
-    getDraw,
-  } = props;
+  const { historyList, getFromHistory, pixelSize, field, fieldSize, getDraw } = props;
 
   const addDrawToHistoryButtonHandler = () => {
     let newDraw = {
@@ -49,18 +41,17 @@ const DrawHistory = (props) => {
         onChange={(e) => setInputName(e.target.value)}
       />
       <button onClick={saveNameInList}>Save</button>
-      <button onClick={getDraw}>GET draw</button>
 
       <ul className="list-ul">
         {historyList.map((item, i) => (
-          <li className="list-li">
+          <li className="list-li" key={item._id}>
             <div className="item_wrap">
               <div className="child-grow" onClick={() => getFromHistory(i)}>
                 {item.name}
               </div>
 
               <div>
-                <button className="btn" onClick={() => deleteDraw(item._id)}>
+                <button className="btn" onClick={() => props.deleteDraw(item._id)}>
                   X
                 </button>
               </div>
@@ -104,12 +95,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addDrawToHistory: (newDraw) => dispatch(addDrawToHistory(newDraw)),
+  deleteDraw: (id) => dispatch(deleteDraw(id)),
   getDraws: () => dispatch(getDraws()),
-  setDrawHistory: (historyTitle) =>
-    dispatch({
-      type: 'SAVE_HISTORY_TITLE',
-      payload: { historyTitle },
-    }),
   getFromHistory: (index) =>
     dispatch({
       type: 'GET_DRAW_FROM_HISTORY',

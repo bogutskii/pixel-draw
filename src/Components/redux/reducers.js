@@ -110,6 +110,13 @@ const drawField = (state = initialState, action) => {
     case 'GET_DRAWS_FROM_SERVER':
       return { ...state, drawHistory: action.payload };
 
+    case 'DELETE_DRAW_FROM_HISTORY':
+      console.log(action.payload.id);
+      let copyDrawList = [...state.drawHistory].filter(
+        (draw) => draw._id !== action.payload,
+      );
+      return { ...state, drawHistory: copyDrawList };
+
     case 'FILL_RANDOM_BRUSH':
       const lnHistory = state.historyColor.length;
       const rand = () => {
