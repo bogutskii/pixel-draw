@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 const Field = (props) => {
   const [continueToDraw, setContinueToDraw] = useState(false);
   const [gridMap, setGridMap] = useState(true);
+  const [fieldSize, setFieldSize] = useState('800');
 
   const {
     field,
@@ -36,6 +37,7 @@ const Field = (props) => {
   return (
     <div className="wrap-app">
       <div>
+        {/*Tools*/}
         <FieldSize />
         <Brush />
         <ColorHisory />
@@ -45,7 +47,20 @@ const Field = (props) => {
           value={currentColor}
           onChange={(e) => changeColor(e.target.value)}
         />
-
+        <div>
+          {/*Range field size*/}
+          <label>{fieldSize} px</label>
+          <input
+            type="range"
+            onChange={(event) => setFieldSize(event.target.value)}
+            min="400"
+            max="1200"
+            step="100"
+            value={fieldSize}
+            width="800px"
+          />
+        </div>
+        {/*Grid map ON/OFF*/}
         <div className="grid-Map mg-10 vert-middle">
           <label className="switch">
             <input
@@ -60,8 +75,13 @@ const Field = (props) => {
         </div>
         <button onClick={clearField}>Clear field</button>
       </div>
+      {/*FIELD DRAW*/}
       <div
         className="grid"
+        style={{
+          width: fieldSize + 'px',
+          height: fieldSize + 'px',
+        }}
         //onKeyDown={onKeyPressed}
         onMouseDown={onKeyPressed}
         onMouseUp={onKeyUp}
