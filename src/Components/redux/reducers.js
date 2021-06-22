@@ -18,7 +18,7 @@ const drawField = (state = initialState, action) => {
     // ******** START DRAW FUNCTIONAL **********************
     case 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY':
       let copyField;
-      let copyHistoryColor = [...state.historyColor];
+      let copyHistoryColor = [...state.historyColor, state.currentColor];
 
       const brushFill = (index, brush, size, array) => {
         let range = [];
@@ -52,7 +52,7 @@ const drawField = (state = initialState, action) => {
       return {
         ...state,
         field: copyField,
-        historyColor: copyHistoryColor,
+        historyColor: [...new Set(copyHistoryColor)],
       };
 
     // end draw brush

@@ -34,30 +34,32 @@ const Field = (props) => {
   };
 
   return (
-    <>
-      <FieldSize />
-      <Brush />
-      <ColorHisory />
-      <DrawHistory />
-      <input
-        type="color"
-        value={currentColor}
-        onChange={(e) => changeColor(e.target.value)}
-      />
+    <div className="wrap-app">
+      <div>
+        <FieldSize />
+        <Brush />
+        <ColorHisory />
+        <DrawHistory />
+        <input
+          type="color"
+          value={currentColor}
+          onChange={(e) => changeColor(e.target.value)}
+        />
 
-      <div className="grid-Map mg-10 vert-middle">
-        <label className="switch">
-          <input
-            type="checkbox"
-            value={gridMap}
-            checked={gridMap}
-            onChange={() => setGridMap(!gridMap)}
-          />
-          <span className="slider"></span>
-        </label>
-        Grid Map
+        <div className="grid-Map mg-10 vert-middle">
+          <label className="switch">
+            <input
+              type="checkbox"
+              value={gridMap}
+              checked={gridMap}
+              onChange={() => setGridMap(!gridMap)}
+            />
+            <span className="slider"></span>
+          </label>
+          Grid Map
+        </div>
+        <button onClick={clearField}>Clear field</button>
       </div>
-
       <div
         className="grid"
         //onKeyDown={onKeyPressed}
@@ -84,9 +86,7 @@ const Field = (props) => {
           </div>
         ))}
       </div>
-
-      <button onClick={clearField}>Clear field</button>
-    </>
+    </div>
   );
 };
 

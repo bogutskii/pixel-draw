@@ -111,3 +111,6 @@ input:checked + .slider:before {
 .list-ul{
   list-style-type: none;
 }
+.wrap-app{
+  display: flex;
+}
