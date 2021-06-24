@@ -5,6 +5,7 @@ import Brush from './Brush';
 import ColorHisory from './ColorHistory';
 import FieldSize from './FieldSize';
 import DrawHistory from './DrawHistory';
+import domtoimage from 'dom-to-image';
 import { v4 as uuidv4 } from 'uuid';
 
 const Field = (props) => {
@@ -32,6 +33,17 @@ const Field = (props) => {
       setContinueToDraw(false);
     }
     console.log('up');
+  };
+
+  const saveToImage = () => {
+    domtoimage
+      .toJpeg(document.getElementById('capture'), { quality: 0.95 })
+      .then(function (dataUrl) {
+        let link = document.createElement('a');
+        link.download = 'my-image-name.jpeg';
+        link.href = dataUrl;
+        link.click();
+      });
   };
 
   return (
@@ -74,37 +86,42 @@ const Field = (props) => {
           Grid Map
         </div>
         <button onClick={clearField}>Clear field</button>
+        <button onClick={saveToImage}>Save Image</button>
       </div>
       {/*FIELD DRAW*/}
-      <div
-        className="grid"
-        style={{
-          width: fieldSize + 'px',
-          height: fieldSize + 'px',
-        }}
-        //onKeyDown={onKeyPressed}
-        onMouseDown={onKeyPressed}
-        onMouseUp={onKeyUp}
-        //onKeyUp={onKeyUp}
-        onMouseLeave={() => setContinueToDraw(false)}
-        tabIndex="0"
-      >
-        {field.map((el, i) => (
-          <div
-            className="pixel"
-            key={i}
-            style={{
-              background: el.color,
-              width: pixelSize + '%',
-              height: pixelSize + '%',
-              border: gridMap ? '1px solid lightgrey' : '',
-            }}
-            onClick={() => changePixelColor(i)}
-            onMouseOver={() => changePixelColor(continueToDraw ? i : undefined)}
-          >
-            {' '}
-          </div>
-        ))}
+      <div>
+        <div
+          id={'capture'}
+          className="grid"
+          id="capture"
+          style={{
+            width: fieldSize + 'px',
+            height: fieldSize + 'px',
+          }}
+          //onKeyDown={onKeyPressed}
+          onMouseDown={onKeyPressed}
+          onMouseUp={onKeyUp}
+          //onKeyUp={onKeyUp}
+          onMouseLeave={() => setContinueToDraw(false)}
+          tabIndex="0"
+        >
+          {field.map((el, i) => (
+            <div
+              className="pixel"
+              key={i}
+              style={{
+                background: el.color,
+                width: pixelSize + '%',
+                height: pixelSize + '%',
+                border: gridMap ? '1px solid lightgrey' : '',
+              }}
+              onClick={() => changePixelColor(i)}
+              onMouseOver={() => changePixelColor(continueToDraw ? i : undefined)}
+            >
+              {' '}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

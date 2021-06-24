@@ -114,3 +114,7 @@ input:checked + .slider:before {
 .wrap-app{
   display: flex;
 }
+#capture{
+  top: 50%;
+  margin: auto;
+}
