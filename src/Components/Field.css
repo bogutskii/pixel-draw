@@ -18,6 +18,7 @@
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
+  width: 600px
 }
 
 .pixel-history {
@@ -58,6 +59,7 @@ body {
   justify-content: center;
   display: flex;
   align-items: center;
+
 }
 .tabs {
   display: flex;

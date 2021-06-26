@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 const App = (props) => {
   return (
     <div className="App">
-      <h1>Pixel</h1>
       <Field />
     </div>
   );
