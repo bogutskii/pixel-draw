@@ -118,3 +118,74 @@ input:checked + .slider:before {
   top: 50%;
   margin: auto;
 }
+
+/* HEADER */
+@import url(https://fonts.googleapis.com/css?family=Baumans);
+
+html {
+  background: #ecf0f1;
+}
+
+input {
+  border: none;
+  outline: none;
+  background: #34495e;
+  color: #fff;
+}
+
+input[type="submit"] {
+  background: #1abc9c;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* ----------- */
+
+header {
+  position: relative;
+  height: 50px;
+  background: #2c3e50;
+  margin-bottom: 10px;
+}
+
+h1 {
+  position: absolute;
+  left: 0.5em;
+  font-family: "Baumans";
+  font-size: 1.5em;
+  text-transform: uppercase;
+  color: #cef0f1;
+}
+
+a {
+  color: #cef0f1;
+  text-decoration: none;
+}
+
+header form{
+  position: absolute;
+  right: 1em;
+  top: 0.6em;
+}
+
+header input {
+  padding: 5px;
+  width: 100px;
+}
+
+header input:focus {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+header input[type="submit"] {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 550px) {
+  header form {
+    display: none;
+  }
+}
+
+/* ------END HEADER----- */

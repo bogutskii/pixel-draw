@@ -90,7 +90,6 @@ const Field = (props) => {
       </div>
       {/*FIELD DRAW*/}
       <div>
-        <h1>Pixel</h1>
         <div
           id={'capture'}
           className="grid"

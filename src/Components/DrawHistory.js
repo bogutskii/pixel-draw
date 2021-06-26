@@ -21,7 +21,7 @@ const DrawHistory = (props) => {
       field: field,
       pixelSize: pixelSize,
       fieldSize: fieldSize,
-      username: 'Admin',
+      username: 'unknown',
     };
     props.addDrawToHistory(newDraw);
   };
