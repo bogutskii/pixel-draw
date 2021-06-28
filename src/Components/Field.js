@@ -85,8 +85,12 @@ const Field = (props) => {
           </label>
           Grid Map
         </div>
-        <button onClick={clearField}>Clear field</button>
-        <button onClick={saveToImage}>Save Image</button>
+        <button onClick={clearField} className="btn-reg">
+          Clear field
+        </button>
+        <button onClick={saveToImage} className="btn-reg">
+          Save Image
+        </button>
       </div>
       {/*FIELD DRAW*/}
       <div>

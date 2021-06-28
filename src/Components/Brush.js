@@ -5,22 +5,22 @@ const Brush = (props) => {
   const { changeBrush, fieldRandomBrush } = props;
   return (
     <div className="brush-block">
-      <button className="btn-brush" onClick={() => changeBrush('dot')}>
+      <button className="btn-reg" onClick={() => changeBrush('dot')}>
         ▣
       </button>
-      <button className="btn-brush" onClick={() => changeBrush('horizontal')}>
+      <button className="btn-reg" onClick={() => changeBrush('horizontal')}>
         ↔
       </button>
-      <button className="btn-brush" onClick={() => changeBrush('vertical')}>
+      <button className="btn-reg" onClick={() => changeBrush('vertical')}>
         ↕
       </button>
-      <button className="btn-brush" onClick={() => changeBrush('cross')}>
+      <button className="btn-reg" onClick={() => changeBrush('cross')}>
         ✚
       </button>
-      <button className="btn-brush" onClick={() => changeBrush('fill')}>
+      <button className="btn-reg" onClick={() => changeBrush('fill')}>
         Fill ▩
       </button>
-      <button className="btn-brush" onClick={fieldRandomBrush}>
+      <button className="btn-reg" onClick={fieldRandomBrush}>
         Fill random ⊞
       </button>
     </div>

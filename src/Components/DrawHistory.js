@@ -34,14 +34,18 @@ const DrawHistory = (props) => {
   };
   return (
     <div className="drawHistory">
-      <input
-        value={inputName}
-        maxLength="15"
-        size="17"
-        onChange={(e) => setInputName(e.target.value)}
-      />
-      <button onClick={saveNameInList}>Save</button>
-
+      <form className="form-inline">
+        <input
+          value={inputName}
+          className="input-save"
+          maxLength="15"
+          size="17"
+          onChange={(e) => setInputName(e.target.value)}
+        />
+        <button onClick={saveNameInList} className="btn-reg">
+          Save
+        </button>
+      </form>
       <ul className="list-ul">
         {historyList.map((item, i) => (
           <li className="list-li" key={item._id}>
