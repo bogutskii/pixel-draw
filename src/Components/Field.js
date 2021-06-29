@@ -7,6 +7,8 @@ import FieldSize from './FieldSize';
 import DrawHistory from './DrawHistory';
 import domtoimage from 'dom-to-image';
 import { v4 as uuidv4 } from 'uuid';
+import ColorChanger from './ColorChanger';
+import CurrentColor from './CurrentColor';
 
 const Field = (props) => {
   const [continueToDraw, setContinueToDraw] = useState(false);
@@ -53,12 +55,8 @@ const Field = (props) => {
         <FieldSize />
         <Brush />
         <ColorHisory />
-        <DrawHistory />
-        <input
-          type="color"
-          value={currentColor}
-          onChange={(e) => changeColor(e.target.value)}
-        />
+        <ColorChanger />
+        <CurrentColor />
         <div>
           {/*Range field size*/}
           <label>{fieldSize} px</label>
@@ -127,6 +125,9 @@ const Field = (props) => {
           ))}
         </div>
       </div>
+      <div className="draw-history-wrap">
+        <DrawHistory />
+      </div>
     </div>
   );
 };
@@ -134,17 +135,9 @@ const Field = (props) => {
 const mapStateToProps = (state) => ({
   field: state.field,
   pixelSize: state.pixelSize,
-  currentColor: state.currentColor,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeColor: (color) =>
-    dispatch({
-      type: 'CHANGE_CURRENT_COLOR',
-      payload: {
-        color,
-      },
-    }),
   changePixelColor: (index) =>
     dispatch({
       type: 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY',
