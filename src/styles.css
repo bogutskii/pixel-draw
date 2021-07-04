@@ -235,3 +235,87 @@ header input[type='submit'] {
   display: flex;
   width: 450px;
 }
+
+
+/* input type color */
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+
+  width: 32px;
+  height: 32px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+/*preloader*/
+:root {
+  --fg: #17181c;
+  --c1: #f42f25;
+  --c2: #f49725;
+  --c3: #255ff4;
+  --c4: #9725f4;
+  font-size: calc(1px + (24 - 16) * (100vw - 320px) / (1280 - 320));
+}
+
+.pl3 {
+  justify-content: space-between;
+}
+.pl3__a, .pl3__b, .pl3__c, .pl3__d {
+  width: 0.75em;
+  height: 0.75em;
+}
+
+.pl3__a, .pl3__b, .pl3__c, .pl3__d {
+  animation: bounce3 2s ease-in-out infinite;
+  transform-origin: 50% 0;
+}
+
+.pl3 {
+  display: flex;
+  margin: 1.5em;
+  width: 6em;
+  height: 6em;
+}
+.pl3__a {
+  background: var(--c1);
+}
+.pl3__b {
+  background: var(--c2);
+  animation-delay: 0.1s;
+}
+.pl3__c {
+  background: var(--c3);
+  animation-delay: 0.2s;
+}
+
+.pl3__d {
+  background: var(--c4);
+  animation-delay: 0.3s;
+}
+
+/* Animations */
+@keyframes bounce3 {
+  from, 5%, 95%, to {
+    transform: translateY(0) scaleY(1);
+  }
+  16.7% {
+    transform: translateY(0) scaleY(8);
+  }
+  28.3%, 38.3% {
+    transform: translateY(5.25em) scaleY(1);
+  }
+  50% {
+    transform: translateY(2.625em) scaleY(4.5);
+  }
+  61.7%, 71.7% {
+    transform: translateY(2.625em) scaleY(1);
+  }
+  83.3% {
+    transform: translateY(0) scaleY(4.5);
+  }
+}

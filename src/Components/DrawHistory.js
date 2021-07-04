@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getDraws, addDrawToHistory, deleteDraw } from '../Components/redux/actions';
 import { v4 as uuidv4 } from 'uuid';
+import Preloader from './preloader/Preloader';
 
 const DrawHistory = (props) => {
   useEffect(() => {
@@ -46,23 +47,27 @@ const DrawHistory = (props) => {
           Save
         </button>
       </form>
-      <ul className="list-ul">
-        {historyList.map((item, i) => (
-          <li className="list-li" key={item._id}>
-            <div className="item_wrap">
-              <div className="child-grow" onClick={() => getFromHistory(i)}>
-                {item.name}
-              </div>
+      {historyList.length ? (
+        <ul className="list-ul">
+          {historyList.map((item, i) => (
+            <li className="list-li" key={item._id}>
+              <div className="item_wrap">
+                <div className="child-grow" onClick={() => getFromHistory(i)}>
+                  {item.name}
+                </div>
 
-              <div>
-                <button className="btn" onClick={() => props.deleteDraw(item._id)}>
-                  X
-                </button>
+                <div>
+                  <button className="btn" onClick={() => props.deleteDraw(item._id)}>
+                    X
+                  </button>
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <Preloader />
+      )}
     </div>
 
     //
