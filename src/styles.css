@@ -58,7 +58,7 @@ input:checked + .slider:before {
 /*list history */
 .drawHistory {
   margin-left: 10px;
-  width: 53%;
+  width: 56%;
 }
 .mg-10 {
   margin: 10px;
@@ -102,6 +102,7 @@ input:checked + .slider:before {
 }
 .input-save {
   height: 36px;
+  width: 100%;
   background: #d7e5fa;
   padding: 5px;
   border: 1px solid #80b5ea;
@@ -140,7 +141,9 @@ input:checked + .slider:before {
   align-items: center;
   margin: 5px;
 }
-
+.mg-0-a {
+  margin: 5px auto;
+}
 .child-grow {
   flex-grow: 1;
 }
@@ -152,7 +155,6 @@ input:checked + .slider:before {
 .wrap-app {
   display: flex;
   justify-content: flex-start;
-
 }
 #capture {
   top: 50%;
@@ -230,25 +232,23 @@ header input[type='submit'] {
 
 /* ------END HEADER----- */
 
-
-.draw-history-wrap{
+.draw-history-wrap {
   display: flex;
   width: 450px;
 }
 
-
 /* input type color */
-input[type="color"] {
+input[type='color'] {
   -webkit-appearance: none;
   border: none;
 
   width: 32px;
   height: 32px;
 }
-input[type="color"]::-webkit-color-swatch-wrapper {
+input[type='color']::-webkit-color-swatch-wrapper {
   padding: 0;
 }
-input[type="color"]::-webkit-color-swatch {
+input[type='color']::-webkit-color-swatch {
   border: none;
 }
 
@@ -265,12 +265,18 @@ input[type="color"]::-webkit-color-swatch {
 .pl3 {
   justify-content: space-between;
 }
-.pl3__a, .pl3__b, .pl3__c, .pl3__d {
+.pl3__a,
+.pl3__b,
+.pl3__c,
+.pl3__d {
   width: 0.75em;
   height: 0.75em;
 }
 
-.pl3__a, .pl3__b, .pl3__c, .pl3__d {
+.pl3__a,
+.pl3__b,
+.pl3__c,
+.pl3__d {
   animation: bounce3 2s ease-in-out infinite;
   transform-origin: 50% 0;
 }
@@ -300,19 +306,24 @@ input[type="color"]::-webkit-color-swatch {
 
 /* Animations */
 @keyframes bounce3 {
-  from, 5%, 95%, to {
+  from,
+  5%,
+  95%,
+  to {
     transform: translateY(0) scaleY(1);
   }
   16.7% {
     transform: translateY(0) scaleY(8);
   }
-  28.3%, 38.3% {
+  28.3%,
+  38.3% {
     transform: translateY(5.25em) scaleY(1);
   }
   50% {
     transform: translateY(2.625em) scaleY(4.5);
   }
-  61.7%, 71.7% {
+  61.7%,
+  71.7% {
     transform: translateY(2.625em) scaleY(1);
   }
   83.3% {

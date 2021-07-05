@@ -43,7 +43,7 @@ const DrawHistory = (props) => {
           size="17"
           onChange={(e) => setInputName(e.target.value)}
         />
-        <button onClick={saveNameInList} className="btn-reg">
+        <button onClick={saveNameInList} className="btn-reg mg-0-a">
           Save
         </button>
       </form>
