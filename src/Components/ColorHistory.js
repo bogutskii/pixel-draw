@@ -18,9 +18,12 @@ const HistoryColor = (props) => {
             {' '}
           </div>
         ))}
-        <button onClick={deleteColorHistory} className="btn-reg">
-          delete history
-        </button>
+
+        <div>
+          <button onClick={deleteColorHistory} className="btn-reg">
+            delete history
+          </button>
+        </div>
       </div>
     </div>
   );

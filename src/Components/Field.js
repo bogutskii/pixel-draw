@@ -62,6 +62,7 @@ const Field = (props) => {
           <label>{fieldSize} px</label>
           <input
             type="range"
+            className="range-field-size"
             onChange={(event) => setFieldSize(event.target.value)}
             min="400"
             max="1200"
@@ -81,7 +82,7 @@ const Field = (props) => {
             />
             <span className="slider"></span>
           </label>
-          Grid Map
+          Grid
         </div>
         <button onClick={clearField} className="btn-reg">
           Clear field

@@ -22,10 +22,10 @@
 }
 
 .pixel-history {
-  width: 30px;
-  height: 30px;
-  border: 1px solid;
-  margin-right: 2px;
+  width: 35px;
+  height: 35px;
+  /*border: 1px solid #b7c8e7;*/
+  margin: 1px;
 }
 
 .btn-brush {
@@ -59,7 +59,7 @@ body {
   justify-content: center;
   display: flex;
   align-items: center;
-
+margin: 5px;
 }
 .tabs {
   display: flex;

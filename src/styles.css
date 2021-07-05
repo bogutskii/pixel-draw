@@ -86,7 +86,10 @@ input:checked + .slider:before {
   background: rgb(230, 248, 255);
   border: 1px solid rgb(6, 172, 213);
 }
-
+.block {
+  display: flex;
+  position: relative;
+}
 .list-wrap {
   width: 200px;
 }
@@ -251,7 +254,10 @@ input[type='color']::-webkit-color-swatch-wrapper {
 input[type='color']::-webkit-color-swatch {
   border: none;
 }
-
+/*range field size*/
+.range-field-size{
+  width: 300px;
+}
 /*preloader*/
 :root {
   --fg: #17181c;
@@ -331,7 +337,6 @@ input[type='color']::-webkit-color-swatch {
   }
 }
 
-
 /*color picker*/
 /* Custom poiners */
 .custom-pointers .react-colorful__saturation-pointer {
@@ -344,3 +349,6 @@ input[type='color']::-webkit-color-swatch {
   width: 16px;
   border-radius: 3px;
 }
+ .react-colorful {
+   width: 400px !important;
+ }
