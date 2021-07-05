@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { HexColorPicker } from 'react-colorful';
+
 import { connect } from 'react-redux';
 
 const CurrentColor = (props) => {
   return (
-    <div>
-      <input
-        type="color"
-        value={props.currentColor}
-        onChange={(e) => props.changeColor(e.target.value)}
+    <div className="custom-pointers">
+      <HexColorPicker
+        className="mg-0-a"
+        color={props.currentColor}
+        onChange={(color) => props.changeColor(color)}
       />
     </div>
   );
