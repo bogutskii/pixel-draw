@@ -85,10 +85,10 @@ const Field = (props) => {
           Grid
         </div>
         <button onClick={clearField} className="btn-reg">
-          Clear field
+          Clear
         </button>
         <button onClick={saveToImage} className="btn-reg">
-          Save Image
+          Download
         </button>
       </div>
       {/*FIELD DRAW*/}

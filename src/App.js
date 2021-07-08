@@ -6,13 +6,15 @@ import { Header } from './Components/Header';
 const App = (props) => {
   return (
     <div className="App">
-      <Header />
+      <Header username={props.username} />
       <Field />
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  username: state.username,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   // changeCreateModal: (value) =>

@@ -14,7 +14,15 @@ const DrawHistory = (props) => {
   // }, []);
 
   const [inputName, setInputName] = useState('');
-  const { historyList, getFromHistory, pixelSize, field, fieldSize, getDraw } = props;
+  const {
+    historyList,
+    getFromHistory,
+    pixelSize,
+    field,
+    fieldSize,
+    getDraw,
+    username,
+  } = props;
 
   const addDrawToHistoryButtonHandler = () => {
     let newDraw = {
@@ -22,7 +30,7 @@ const DrawHistory = (props) => {
       field: field,
       pixelSize: pixelSize,
       fieldSize: fieldSize,
-      username: 'unknown',
+      username: username,
     };
     props.addDrawToHistory(newDraw);
   };
@@ -32,6 +40,14 @@ const DrawHistory = (props) => {
       addDrawToHistoryButtonHandler();
       setInputName('');
     }
+  };
+
+  const deleteDrawReq = (id) => {
+    if (username === historyList.find((el) => el._id === id).username) {
+      console.log('YES');
+      props.deleteDraw(id);
+    }
+    console.log(historyList.find((el) => el._id === id).username);
   };
   return (
     <div className="drawHistory">
@@ -57,7 +73,7 @@ const DrawHistory = (props) => {
                 </div>
 
                 <div>
-                  <button className="btn" onClick={() => props.deleteDraw(item._id)}>
+                  <button className="btn" onClick={() => deleteDrawReq(item._id)}>
                     X
                   </button>
                 </div>
@@ -100,6 +116,7 @@ const mapStateToProps = (state) => ({
   field: state.field,
   pixelSize: state.pixelSize,
   fieldSize: state.fieldSize,
+  username: state.username,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -6,6 +6,7 @@ const initialState = {
   currentColor: '#000000',
   brush: 'dot',
   drawHistory: [],
+  username: 'unknown1',
 };
 
 const drawField = (state = initialState, action) => {
@@ -97,6 +98,11 @@ const drawField = (state = initialState, action) => {
       return {
         ...state,
         brush: action.payload.brush,
+      };
+    case 'SWITCH_COLOR':
+      console.log(action.payload.color, action.payload.toColor);
+      return {
+        ...state,
       };
 
     case 'ADD_DRAW_TO_HISTORY':
