@@ -14,15 +14,7 @@ const DrawHistory = (props) => {
   // }, []);
 
   const [inputName, setInputName] = useState('');
-  const {
-    historyList,
-    getFromHistory,
-    pixelSize,
-    field,
-    fieldSize,
-    getDraw,
-    username,
-  } = props;
+  const { historyList, getFromHistory, pixelSize, field, fieldSize, username } = props;
 
   const addDrawToHistoryButtonHandler = () => {
     let newDraw = {
@@ -33,21 +25,19 @@ const DrawHistory = (props) => {
       username: username,
     };
     props.addDrawToHistory(newDraw);
+    setInputName('');
   };
 
   const saveNameInList = () => {
-    if (inputName && !historyList.some((el) => el.name === inputName)) {
+    if (inputName) {
       addDrawToHistoryButtonHandler();
-      setInputName('');
     }
   };
 
-  const deleteDrawReq = (id) => {
-    if (username === historyList.find((el) => el._id === id).username) {
-      console.log('YES');
+  const deleteDrawReq = (id, author) => {
+    if (username === author) {
       props.deleteDraw(id);
     }
-    console.log(historyList.find((el) => el._id === id).username);
   };
   return (
     <div className="drawHistory">
@@ -69,13 +59,18 @@ const DrawHistory = (props) => {
             <li className="list-li" key={item._id}>
               <div className="item_wrap">
                 <div className="child-grow" onClick={() => getFromHistory(i)}>
-                  {item.name}
+                  {item.name + ' ' + item.username}
                 </div>
 
                 <div>
-                  <button className="btn" onClick={() => deleteDrawReq(item._id)}>
+                  {/*{username === item.username && (*/}
+                  <button
+                    className="btn"
+                    onClick={() => deleteDrawReq(item._id, item.username)}
+                  >
                     X
                   </button>
+                  {/*)}*/}
                 </div>
               </div>
             </li>
@@ -85,30 +80,6 @@ const DrawHistory = (props) => {
         <Preloader />
       )}
     </div>
-
-    //
-    // <div>
-    //   <ul>
-    //     {historyList.map((el, i) => (
-    //       <li
-    //         className="draw-history-item"
-    //         key={uuidv4()}
-    //         onClick={() => getFromHistory(el.name, i)}
-    //       >
-    //         {el.name}
-    //
-    //         <button>delete</button>
-    //         <button>re-Save</button>
-    //       </li>
-    //     ))}
-    //   </ul>
-    //   <input
-    //     type="text"
-    //     value={inputName}
-    //     onChange={(e) => setInputName(e.target.value)}
-    //   />
-    //   <button onClick={saveNameInList}>save</button>
-    // </div>
   );
 };
 const mapStateToProps = (state) => ({
@@ -130,7 +101,7 @@ const mapDispatchToProps = (dispatch) => ({
         index,
       },
     }),
-  getDraw: () => dispatch(getDraw()),
+  //getDraw: () => dispatch(getDraw()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrawHistory);

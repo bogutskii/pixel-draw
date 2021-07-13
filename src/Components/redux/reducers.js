@@ -6,7 +6,7 @@ const initialState = {
   currentColor: '#000000',
   brush: 'dot',
   drawHistory: [],
-  username: 'unknown1',
+  username: 'unknown123',
 };
 
 const drawField = (state = initialState, action) => {

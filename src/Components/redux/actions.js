@@ -20,8 +20,8 @@ export function addDrawToHistory(newDraw) {
       .post('https://draw-pixel-server.herokuapp.com/draw', newDraw)
       .then((res) => {
         dispatch({
-          type: 'ADD_DRAW_TO_HISTORY',
-          payload: newDraw,
+          // type: 'ADD_DRAW_TO_HISTORY',
+          // payload: newDraw,
         });
       })
       .catch((err) => err);
