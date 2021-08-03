@@ -33,6 +33,18 @@ const drawField = (state = initialState, action) => {
         } else if (brush === 'cross') {
           range = horizontal(index, size);
           checkList = vertical(index, size);
+        } else if (brush === 'mirrorH') {
+          let dif = size === 400 ? 380 : size === 1600 ? 1560 : 90; //10 -- 1550= 1570  30 -1530 = 1590
+          let m = 0;
+          if (size === 1600 && index % 20 > 9) {
+            m += 20;
+          }
+          array[index] = { ...array[index], color: state.currentColor };
+          array[Math.abs(dif - index + (index % 10) * 2 + m)] = {
+            ...array[Math.abs(dif - index + (index % 10) * 2 + m)],
+            color: state.currentColor,
+          };
+          return array;
         } else {
           range = [index, index];
         }

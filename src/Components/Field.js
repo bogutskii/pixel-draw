@@ -119,7 +119,11 @@ const Field = (props) => {
                 border: gridMap ? '1px solid lightgrey' : '',
               }}
               onClick={() => changePixelColor(i)}
-              onMouseOver={() => changePixelColor(continueToDraw ? i : undefined)}
+              onMouseOver={
+                props.brush !== 'fill'
+                  ? () => changePixelColor(continueToDraw ? i : undefined)
+                  : ''
+              }
             >
               {' '}
             </div>
@@ -136,6 +140,7 @@ const Field = (props) => {
 const mapStateToProps = (state) => ({
   field: state.field,
   pixelSize: state.pixelSize,
+  brush: state.brush,
 });
 
 const mapDispatchToProps = (dispatch) => ({

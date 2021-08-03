@@ -136,7 +136,12 @@ input:checked + .slider:before {
   background-color: #80b5ea;
 }
 .btn-reg:active {
+  background: linear-gradient(to bottom, #fceadd 5%, rgba(255, 184, 141, 0.94) 100%);
   position: relative;
+}
+.btn-pushed{
+  background: linear-gradient(to bottom, #fceadd 5%, rgba(226, 91, 255, 0.94) 100%);
+
 }
 .form-inline {
   display: flex;

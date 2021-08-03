@@ -2,23 +2,44 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const Brush = (props) => {
-  const { changeBrush, fieldRandomBrush } = props;
+  const { changeBrush, fieldRandomBrush, brush } = props;
   return (
     <div className="brush-block">
-      <button className="btn-reg" onClick={() => changeBrush('dot')}>
+      <button
+        className={`btn-reg ${brush === 'dot' ? 'btn-pushed' : ''}`}
+        onClick={() => changeBrush('dot')}
+      >
         ▣
       </button>
-      <button className="btn-reg" onClick={() => changeBrush('horizontal')}>
+      <button
+        className={`btn-reg ${brush === 'horizontal' ? 'btn-pushed' : ''}`}
+        onClick={() => changeBrush('horizontal')}
+      >
         ↔
       </button>
-      <button className="btn-reg" onClick={() => changeBrush('vertical')}>
+      <button
+        className={`btn-reg ${brush === 'vertical' ? 'btn-pushed' : ''}`}
+        onClick={() => changeBrush('vertical')}
+      >
         ↕
       </button>
-      <button className="btn-reg" onClick={() => changeBrush('cross')}>
+      <button
+        className={`btn-reg ${brush === 'cross' ? 'btn-pushed' : ''}`}
+        onClick={() => changeBrush('cross')}
+      >
         ✚
       </button>
-      <button className="btn-reg" onClick={() => changeBrush('fill')}>
+      <button
+        className={`btn-reg ${brush === 'fill' ? 'btn-pushed' : ''}`}
+        onClick={() => changeBrush('fill')}
+      >
         Fill ▩
+      </button>
+      <button
+        className={`btn-reg ${brush === 'mirrorH' ? 'btn-pushed' : ''}`}
+        onClick={() => changeBrush('mirrorH')}
+      >
+        ⁙
       </button>
       <button className="btn-reg" onClick={fieldRandomBrush}>
         Fill random ⊞
