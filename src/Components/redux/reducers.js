@@ -45,6 +45,18 @@ const drawField = (state = initialState, action) => {
             color: state.currentColor,
           };
           return array;
+        } else if (brush === 'mirrorV') {
+          let dif = size === 400 ? 20 : size === 1600 ? 40 : 10; //10 -- 1550= 1570  30 -1530 = 1590
+          let m = 0;
+          // if (size === 1600 && index % 20 > 9) {
+          //   m += 20;
+          // }
+          array[index] = { ...array[index], color: state.currentColor };
+          array[Math.abs(dif - 1 - (index % dif) + index - (index % dif))] = {
+            ...array[Math.abs(dif - 1 - (index % dif) + index - (index % dif))],
+            color: state.currentColor,
+          };
+          return array;
         } else {
           range = [index, index];
         }

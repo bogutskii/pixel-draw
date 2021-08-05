@@ -125,7 +125,7 @@ const Field = (props) => {
                   : ''
               }
             >
-              {' '}
+              {''}
             </div>
           ))}
         </div>

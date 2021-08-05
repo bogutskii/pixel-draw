@@ -33,16 +33,22 @@ const Brush = (props) => {
         className={`btn-reg ${brush === 'fill' ? 'btn-pushed' : ''}`}
         onClick={() => changeBrush('fill')}
       >
-        Fill ▩
+        fill ▩
       </button>
       <button
         className={`btn-reg ${brush === 'mirrorH' ? 'btn-pushed' : ''}`}
         onClick={() => changeBrush('mirrorH')}
       >
-        ⁙
+        ═
+      </button>
+      <button
+        className={`btn-reg ${brush === 'mirrorV' ? 'btn-pushed' : ''}`}
+        onClick={() => changeBrush('mirrorV')}
+      >
+        ||
       </button>
       <button className="btn-reg" onClick={fieldRandomBrush}>
-        Fill random ⊞
+        random ⊞
       </button>
     </div>
   );
