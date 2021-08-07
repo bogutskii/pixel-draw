@@ -143,6 +143,11 @@ input:checked + .slider:before {
   background: linear-gradient(to bottom, #fceadd 5%, rgba(226, 91, 255, 0.94) 100%);
 
 }
+
+.img-icon-btn{
+  height: 18px;
+
+}
 .form-inline {
   display: flex;
   flex-flow: row wrap;

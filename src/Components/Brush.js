@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import fill from './icons/fill.png';
 
 const Brush = (props) => {
   const { changeBrush, fieldRandomBrush, brush } = props;
@@ -33,7 +34,7 @@ const Brush = (props) => {
         className={`btn-reg ${brush === 'fill' ? 'btn-pushed' : ''}`}
         onClick={() => changeBrush('fill')}
       >
-        fill ▩
+        <img src={fill} className="img-icon-btn" />
       </button>
       <button
         className={`btn-reg ${brush === 'mirrorH' ? 'btn-pushed' : ''}`}
