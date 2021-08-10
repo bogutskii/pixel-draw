@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import history_del from './icons/history_del.png';
 
 const HistoryColor = (props) => {
   const { historyColor, changeColor, deleteColorHistory } = props;
@@ -20,8 +21,8 @@ const HistoryColor = (props) => {
         ))}
 
         <div>
-          <button onClick={deleteColorHistory} className="btn-reg">
-            delete history
+          <button onClick={deleteColorHistory} className="btn-reg warn">
+            <img src={history_del} className="img-icon-btn" />
           </button>
         </div>
       </div>

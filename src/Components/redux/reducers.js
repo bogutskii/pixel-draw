@@ -20,7 +20,11 @@ const drawField = (state = initialState, action) => {
     case 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY':
       let copyField;
       let copyHistoryColor = [...state.historyColor, state.currentColor];
-
+      if (state.brush === 'color-picker') {
+        if (action.payload.index) {
+          return { ...state, currentColor: state.field[action.payload.index].color };
+        }
+      }
       const brushFill = (index, brush, size, array) => {
         let range = [];
         let checkList = [];
@@ -34,7 +38,7 @@ const drawField = (state = initialState, action) => {
           range = horizontal(index, size);
           checkList = vertical(index, size);
         } else if (brush === 'mirrorH') {
-          let dif = size === 400 ? 380 : size === 1600 ? 1560 : 90; //10 -- 1550= 1570  30 -1530 = 1590
+          let dif = size === 400 ? 380 : size === 1600 ? 1560 : 90;
           let m = 0;
           if (size === 1600 && index % 20 > 9) {
             m += 20;
@@ -46,11 +50,8 @@ const drawField = (state = initialState, action) => {
           };
           return array;
         } else if (brush === 'mirrorV') {
-          let dif = size === 400 ? 20 : size === 1600 ? 40 : 10; //10 -- 1550= 1570  30 -1530 = 1590
+          let dif = size === 400 ? 20 : size === 1600 ? 40 : 10;
           let m = 0;
-          // if (size === 1600 && index % 20 > 9) {
-          //   m += 20;
-          // }
           array[index] = { ...array[index], color: state.currentColor };
           array[Math.abs(dif - 1 - (index % dif) + index - (index % dif))] = {
             ...array[Math.abs(dif - 1 - (index % dif) + index - (index % dif))],
@@ -60,6 +61,7 @@ const drawField = (state = initialState, action) => {
         } else {
           range = [index, index];
         }
+
         return array.map((el, i) =>
           (i >= range[0] && i <= range[1]) ||
           (checkList.includes(i) && checkList.length > 0)

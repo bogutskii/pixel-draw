@@ -125,9 +125,8 @@ input:checked + .slider:before {
   cursor: pointer;
   color: #000000;
   font-family: Arial;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 6px 24px;
+  font-size: 28px;
+  padding: 2px 10px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #9fc7f3;
 }
@@ -139,14 +138,19 @@ input:checked + .slider:before {
   background: linear-gradient(to bottom, #fceadd 5%, rgba(255, 184, 141, 0.94) 100%);
   position: relative;
 }
-.btn-pushed{
+.btn-pushed {
   background: linear-gradient(to bottom, #fceadd 5%, rgba(226, 91, 255, 0.94) 100%);
-
 }
-
-.img-icon-btn{
-  height: 18px;
-
+.warn {
+  background: linear-gradient(to bottom, #fcdde3 5%, rgba(245, 130, 140, 0.65) 100%);
+  border: 1px solid #ef6565;
+}
+.warn:hover {
+  background: linear-gradient(to bottom, #f39292 5%, rgba(236, 104, 104, 0.9) 100%);
+  background-color: #ea80aa;
+}
+.img-icon-btn {
+  height: 24px;
 }
 .form-inline {
   display: flex;
@@ -265,7 +269,7 @@ input[type='color']::-webkit-color-swatch {
   border: none;
 }
 /*range field size*/
-.range-field-size{
+.range-field-size {
   width: 300px;
 }
 /*preloader*/
@@ -359,6 +363,6 @@ input[type='color']::-webkit-color-swatch {
   width: 16px;
   border-radius: 3px;
 }
- .react-colorful {
-   width: 400px !important;
- }
+.react-colorful {
+  width: 400px !important;
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import fill from './icons/fill.png';
+import random from './icons/random.jpeg';
+import colorpicker from './icons/colorpicker.png';
 
 const Brush = (props) => {
   const { changeBrush, fieldRandomBrush, brush } = props;
@@ -48,8 +50,14 @@ const Brush = (props) => {
       >
         ||
       </button>
+      <button
+        className={`btn-reg ${brush === 'color-picker' ? 'btn-pushed' : ''}`}
+        onClick={() => changeBrush('color-picker')}
+      >
+        <img src={colorpicker} className="img-icon-btn" />
+      </button>
       <button className="btn-reg" onClick={fieldRandomBrush}>
-        random ⊞
+        <img src={random} className="img-icon-btn" />
       </button>
     </div>
   );

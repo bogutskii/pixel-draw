@@ -27,14 +27,12 @@ const Field = (props) => {
   const onKeyPressed = (e) => {
     if (e.code === 'Space' || e.type === 'mousedown') {
       setContinueToDraw(true);
-      console.log('pres');
     }
   };
   const onKeyUp = (e) => {
     if (e.code === 'Space' || e.type === 'mouseup') {
       setContinueToDraw(false);
     }
-    console.log('up');
   };
 
   const saveToImage = () => {
@@ -84,7 +82,7 @@ const Field = (props) => {
           </label>
           Grid
         </div>
-        <button onClick={clearField} className="btn-reg">
+        <button onClick={clearField} className="btn-reg warn">
           Clear
         </button>
         <button onClick={saveToImage} className="btn-reg">
@@ -104,7 +102,6 @@ const Field = (props) => {
           //onKeyDown={onKeyPressed}
           onMouseDown={onKeyPressed}
           onMouseUp={onKeyUp}
-          //onKeyUp={onKeyUp}
           onMouseLeave={() => setContinueToDraw(false)}
           tabIndex="0"
         >
@@ -122,7 +119,7 @@ const Field = (props) => {
               onMouseOver={
                 props.brush !== 'fill'
                   ? () => changePixelColor(continueToDraw ? i : undefined)
-                  : ''
+                  : console.log('nope')
               }
             >
               {''}
