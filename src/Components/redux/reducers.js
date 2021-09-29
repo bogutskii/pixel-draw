@@ -25,6 +25,33 @@ const drawField = (state = initialState, action) => {
           return { ...state, currentColor: state.field[action.payload.index].color };
         }
       }
+
+      if (state.brush === 'fillPart') {
+        console.log(action.payload.index);
+        if (action.payload.index) {
+          // let res = fillParticip(
+          //   [...state.field],
+          //   action.payload.index,
+          //   10,
+          //   state.fieldSize,
+          //   state.field[action.payload.index].color,
+          //   state.currentColor,
+          // );
+          return {
+            ...state,
+            field: fillParticip(
+              [...state.field],
+              action.payload.index,
+              10,
+              state.fieldSize,
+              state.field[action.payload.index].color,
+              state.currentColor,
+            ),
+          };
+        }
+        return state;
+      }
+
       const brushFill = (index, brush, size, array) => {
         let range = [];
         let checkList = [];
@@ -51,7 +78,6 @@ const drawField = (state = initialState, action) => {
           return array;
         } else if (brush === 'mirrorV') {
           let dif = size === 400 ? 20 : size === 1600 ? 40 : 10;
-          let m = 0;
           array[index] = { ...array[index], color: state.currentColor };
           array[Math.abs(dif - 1 - (index % dif) + index - (index % dif))] = {
             ...array[Math.abs(dif - 1 - (index % dif) + index - (index % dif))],
@@ -86,7 +112,7 @@ const drawField = (state = initialState, action) => {
     case 'CLEAR_FIELD':
       return {
         ...state,
-        field: new Array(state.fieldSize).fill({ color: 'white' }),
+        field: new Array(state.fieldSize).fill({ color: '#ffffff' }),
         brush: 'dot',
       };
     case 'DELETE_COLOR_HISTORY':
@@ -98,21 +124,21 @@ const drawField = (state = initialState, action) => {
       if (action.payload.size === 100) {
         return {
           ...state,
-          field: new Array(100).fill({ color: 'white' }),
+          field: new Array(100).fill({ color: '#ffffff' }),
           fieldSize: 100,
           pixelSize: 10,
         };
       } else if (action.payload.size === 400) {
         return {
           ...state,
-          field: new Array(400).fill({ color: 'white' }),
+          field: new Array(400).fill({ color: '#ffffff' }),
           fieldSize: 400,
           pixelSize: 5,
         };
       } else if (action.payload.size === 1600) {
         return {
           ...state,
-          field: new Array(1600).fill({ color: 'white' }),
+          field: new Array(1600).fill({ color: '#ffffff' }),
           fieldSize: 1600,
           pixelSize: 2.5,
         };
@@ -126,7 +152,6 @@ const drawField = (state = initialState, action) => {
         brush: action.payload.brush,
       };
     case 'SWITCH_COLOR':
-      console.log(action.payload.color, action.payload.toColor);
       return {
         ...state,
       };
@@ -143,7 +168,6 @@ const drawField = (state = initialState, action) => {
       return { ...state, drawHistory: action.payload };
 
     case 'DELETE_DRAW_FROM_HISTORY':
-      console.log(action.payload.id);
       let copyDrawList = [...state.drawHistory].filter(
         (draw) => draw._id !== action.payload,
       );
@@ -160,7 +184,6 @@ const drawField = (state = initialState, action) => {
           color: state.historyColor[Math.floor(Math.random() * lnHistory)],
         };
       });
-      console.log(rand, randomField);
       return {
         ...state,
         field: randomField,
@@ -168,6 +191,33 @@ const drawField = (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+const fillParticip = (arr, current, size, max, oldColor, newColor) => {
+  let a = [...arr];
+  let next = [];
+  let stop = [];
+  function ch(current) {
+    if (a[current].color === oldColor) {
+      a[current].color = newColor;
+      stop.push(current);
+      let up, down, left, right;
+      up = current - size;
+      down = current + size;
+      left = current - 1;
+      right = current + 1;
+      next.push(
+        ...[up, down, left, right].filter(
+          (e) => e >= 0 && !stop.includes(e) && !next.includes(e) && e <= max,
+        ),
+      );
+    } else {
+      stop.push(current);
+    }
+    next = next.filter((el) => el !== current);
+    return next.length > 0 ? ch(next[0], size, newColor, max) : a;
+  }
+  return ch(current);
 };
 
 const horizontal = (index, size) => {

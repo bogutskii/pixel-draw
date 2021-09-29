@@ -39,6 +39,13 @@ const Brush = (props) => {
         <img src={fill} className="img-icon-btn" />
       </button>
       <button
+        className={`btn-reg ${brush === 'fillPart' ? 'btn-pushed' : ''}`}
+        onClick={() => changeBrush('fillPart')}
+      >
+        fillPart
+        {/*<img src={fill} className="img-icon-btn" />*/}
+      </button>
+      <button
         className={`btn-reg ${brush === 'mirrorH' ? 'btn-pushed' : ''}`}
         onClick={() => changeBrush('mirrorH')}
       >

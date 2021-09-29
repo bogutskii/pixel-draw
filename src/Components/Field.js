@@ -99,7 +99,6 @@ const Field = (props) => {
             width: fieldSize + 'px',
             height: fieldSize + 'px',
           }}
-          //onKeyDown={onKeyPressed}
           onMouseDown={onKeyPressed}
           onMouseUp={onKeyUp}
           onMouseLeave={() => setContinueToDraw(false)}
@@ -122,7 +121,7 @@ const Field = (props) => {
                   : console.log('nope')
               }
             >
-              {''}
+              {i}
             </div>
           ))}
         </div>
