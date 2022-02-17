@@ -42,7 +42,7 @@ const Brush = (props) => {
         className={`btn-reg ${brush === 'fillPart' ? 'btn-pushed' : ''}`}
         onClick={() => changeBrush('fillPart')}
       >
-        fillPart
+        fillPart(bugs)
         {/*<img src={fill} className="img-icon-btn" />*/}
       </button>
       <button

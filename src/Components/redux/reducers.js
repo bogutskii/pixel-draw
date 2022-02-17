@@ -6,7 +6,7 @@ const initialState = {
   currentColor: '#000000',
   brush: 'dot',
   drawHistory: [],
-  username: 'unknown123',
+  username: 'unknown',
 };
 
 const drawField = (state = initialState, action) => {
@@ -18,6 +18,7 @@ const drawField = (state = initialState, action) => {
       };
     // ******** START DRAW FUNCTIONAL **********************
     case 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY':
+      console.log(state);
       let copyField;
       let copyHistoryColor = [...state.historyColor, state.currentColor];
       if (state.brush === 'color-picker') {
@@ -25,28 +26,20 @@ const drawField = (state = initialState, action) => {
           return { ...state, currentColor: state.field[action.payload.index].color };
         }
       }
-
       if (state.brush === 'fillPart') {
         console.log(action.payload.index);
         if (action.payload.index) {
-          // let res = fillParticip(
-          //   [...state.field],
-          //   action.payload.index,
-          //   10,
-          //   state.fieldSize,
-          //   state.field[action.payload.index].color,
-          //   state.currentColor,
-          // );
+          let newField = fillParticip(
+            [...state.field],
+            action.payload.index,
+            10,
+            state.fieldSize,
+            state.field[action.payload.index].color,
+            state.currentColor,
+          );
           return {
             ...state,
-            field: fillParticip(
-              [...state.field],
-              action.payload.index,
-              10,
-              state.fieldSize,
-              state.field[action.payload.index].color,
-              state.currentColor,
-            ),
+            field: newField,
           };
         }
         return state;
@@ -193,12 +186,14 @@ const drawField = (state = initialState, action) => {
   }
 };
 
-const fillParticip = (arr, current, size, max, oldColor, newColor) => {
+function fillParticip(arr, current, size, max, oldColor, newColor) {
+  console.log(arr, current, size, max, oldColor, newColor);
+  if (oldColor === newColor) return arr;
   let a = [...arr];
   let next = [];
   let stop = [];
   function ch(current) {
-    if (a[current].color === oldColor) {
+    if (a[current].color === oldColor && current) {
       a[current].color = newColor;
       stop.push(current);
       let up, down, left, right;
@@ -218,7 +213,7 @@ const fillParticip = (arr, current, size, max, oldColor, newColor) => {
     return next.length > 0 ? ch(next[0], size, newColor, max) : a;
   }
   return ch(current);
-};
+}
 
 const horizontal = (index, size) => {
   if (size === 100) {
