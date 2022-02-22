@@ -118,10 +118,10 @@ const Field = (props) => {
               onMouseOver={
                 props.brush !== 'fill'
                   ? () => changePixelColor(continueToDraw ? i : undefined)
-                  : console.log('nope')
+                  : null
               }
             >
-              {i}
+              {}
             </div>
           ))}
         </div>

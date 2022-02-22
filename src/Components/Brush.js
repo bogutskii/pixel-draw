@@ -89,14 +89,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Brush);
-//fieldRandomBrush('random')
-// const mapStateToProps = (state) => ({
-//   brush: state.brush,
-// });
-//
-
-//   fieldRandomBrush: () =>
-//     dispatch({
-//       type: 'FILL_RANDOM_BRUSH',
-//       payload: {},
-//     }),

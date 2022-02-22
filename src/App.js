@@ -16,14 +16,4 @@ const mapStateToProps = (state) => ({
   username: state.username,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  // changeCreateModal: (value) =>
-  //   dispatch({
-  //     type: 'CHANGE_CREATE_MODAL',
-  //     payload: {
-  //       value: value,
-  //     },
-  //   }),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

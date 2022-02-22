@@ -18,7 +18,6 @@ const drawField = (state = initialState, action) => {
       };
     // ******** START DRAW FUNCTIONAL **********************
     case 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY':
-      console.log(state);
       let copyField;
       let copyHistoryColor = [...state.historyColor, state.currentColor];
       if (state.brush === 'color-picker') {
@@ -27,7 +26,7 @@ const drawField = (state = initialState, action) => {
         }
       }
       if (state.brush === 'fillPart') {
-        console.log(action.payload.index);
+        console.log('current: ', action.payload);
         if (action.payload.index) {
           let newField = fillParticip(
             [...state.field],
@@ -193,6 +192,7 @@ function fillParticip(arr, current, size, max, oldColor, newColor) {
   let next = [];
   let stop = [];
   function ch(current) {
+    console.log(current);
     if (a[current].color === oldColor && current) {
       a[current].color = newColor;
       stop.push(current);
