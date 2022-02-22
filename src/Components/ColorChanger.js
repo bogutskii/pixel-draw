@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 const ColorChanger = (props) => {
   return (
     <div className="mg-10">
-      <span>=></span>
       <br />
     </div>
   );

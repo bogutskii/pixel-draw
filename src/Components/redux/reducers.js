@@ -26,10 +26,9 @@ const drawField = (state = initialState, action) => {
         }
       }
       if (state.brush === 'fillPart') {
-        console.log('current: ', action.payload);
-        if (action.payload.index) {
+        if (action.payload.index >= 0) {
           let newField = fillParticip(
-            [...state.field],
+            JSON.stringify(state.field),
             action.payload.index,
             10,
             state.fieldSize,
@@ -167,9 +166,6 @@ const drawField = (state = initialState, action) => {
 
     case 'FILL_RANDOM_BRUSH':
       const lnHistory = state.historyColor.length;
-      const rand = () => {
-        Math.floor(Math.random() * lnHistory);
-      };
       let randomField = state.field.map(function (el) {
         return {
           ...el,
@@ -185,15 +181,16 @@ const drawField = (state = initialState, action) => {
   }
 };
 
-function fillParticip(arr, current, size, max, oldColor, newColor) {
-  console.log(arr, current, size, max, oldColor, newColor);
-  if (oldColor === newColor) return arr;
-  let a = [...arr];
+function fillParticip(arrJSON, current, size, max, oldColor, newColor) {
+  console.log(arrJSON, current, size, max, oldColor, newColor);
+  let a = JSON.parse(arrJSON);
+  if (oldColor === newColor) return a;
+
   let next = [];
   let stop = [];
   function ch(current) {
     console.log(current);
-    if (a[current].color === oldColor && current) {
+    if (a[current] && a[current].color === oldColor) {
       a[current].color = newColor;
       stop.push(current);
       let up, down, left, right;
