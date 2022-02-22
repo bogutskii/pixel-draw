@@ -36,7 +36,7 @@ const Brush = (props) => {
         className={`btn-reg ${brush === 'fill' ? 'btn-pushed' : ''}`}
         onClick={() => changeBrush('fill')}
       >
-        <img src={fill} className="img-icon-btn" />
+        <img src={fill} className="img-icon-btn" alt="icon-fill" />
       </button>
       <button
         className={`btn-reg ${brush === 'fillPart' ? 'btn-pushed' : ''}`}
@@ -61,10 +61,10 @@ const Brush = (props) => {
         className={`btn-reg ${brush === 'color-picker' ? 'btn-pushed' : ''}`}
         onClick={() => changeBrush('color-picker')}
       >
-        <img src={colorpicker} className="img-icon-btn" />
+        <img src={colorpicker} className="img-icon-btn" alt="icon-colorpicker" />
       </button>
       <button className="btn-reg" onClick={fieldRandomBrush}>
-        <img src={random} className="img-icon-btn" />
+        <img src={random} className="img-icon-btn" alt="icon-random" />
       </button>
     </div>
   );
