@@ -15,14 +15,8 @@ const Field = (props) => {
   const [gridMap, setGridMap] = useState(true);
   const [fieldSize, setFieldSize] = useState('800');
 
-  const {
-    field,
-    currentColor,
-    changeColor,
-    changePixelColor,
-    clearField,
-    pixelSize,
-  } = props;
+  const { field, currentColor, changeColor, changePixelColor, clearField, pixelSize } =
+    props;
 
   const onKeyPressed = (e) => {
     if (e.code === 'Space' || e.type === 'mousedown') {
@@ -121,7 +115,7 @@ const Field = (props) => {
                   : null
               }
             >
-              {i}
+              {}
             </div>
           ))}
         </div>

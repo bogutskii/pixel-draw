@@ -4,7 +4,7 @@ import fill from './icons/fill.png';
 import random from './icons/random.jpeg';
 import colorpicker from './icons/colorpicker.png';
 
-const Brush = (props) => {
+function Brush(props) {
   const { changeBrush, fieldRandomBrush, brush } = props;
   return (
     <div className="brush-block">
@@ -43,7 +43,7 @@ const Brush = (props) => {
         onClick={() => changeBrush('fillPart')}
       >
         fillPart
-        {/*<img src={fill} className="img-icon-btn" />*/}
+        {/* <img src={fill} className="img-icon-btn" /> */}
       </button>
       <button
         className={`btn-reg ${brush === 'mirrorH' ? 'btn-pushed' : ''}`}
@@ -68,24 +68,22 @@ const Brush = (props) => {
       </button>
     </div>
   );
-};
+}
 const mapStateToProps = (state) => ({
   brush: state.brush,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeBrush: (brush) =>
-    dispatch({
-      type: 'CHANGE_BRUSH',
-      payload: {
-        brush,
-      },
-    }),
-  fieldRandomBrush: () =>
-    dispatch({
-      type: 'FILL_RANDOM_BRUSH',
-      payload: {},
-    }),
+  changeBrush: (brush) => dispatch({
+    type: 'CHANGE_BRUSH',
+    payload: {
+      brush
+    }
+  }),
+  fieldRandomBrush: () => dispatch({
+    type: 'FILL_RANDOM_BRUSH',
+    payload: {}
+  })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Brush);
