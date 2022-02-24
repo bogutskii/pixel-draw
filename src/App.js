@@ -1,7 +1,7 @@
 import './styles.css';
-import Field from './Components/Field.js';
+import Field from './components/Field.js';
 import { connect } from 'react-redux';
-import { Header } from './Components/Header';
+import { Header } from './components/Header';
 
 const App = (props) => {
   return (

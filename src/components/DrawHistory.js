@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { getDraws, addDrawToHistory, deleteDraw } from '../Components/redux/actions';
-import { v4 as uuidv4 } from 'uuid';
+import { addDrawToHistory, deleteDraw, getDraws } from './/redux/actions';
 import Preloader from './preloader/Preloader';
 
 const DrawHistory = (props) => {
@@ -22,7 +21,7 @@ const DrawHistory = (props) => {
       field: field,
       pixelSize: pixelSize,
       fieldSize: fieldSize,
-      username: username,
+      username: username
     };
     props.addDrawToHistory(newDraw);
     setInputName('');
@@ -87,7 +86,7 @@ const mapStateToProps = (state) => ({
   field: state.field,
   pixelSize: state.pixelSize,
   fieldSize: state.fieldSize,
-  username: state.username,
+  username: state.username
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -98,9 +97,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({
       type: 'GET_DRAW_FROM_HISTORY',
       payload: {
-        index,
-      },
-    }),
+        index
+      }
+    })
   //getDraw: () => dispatch(getDraw()),
 });
 

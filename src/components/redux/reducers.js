@@ -6,7 +6,7 @@ const initialState = {
   currentColor: '#000000',
   brush: 'dot',
   drawHistory: [],
-  username: 'unknown',
+  username: 'unknown'
 };
 
 const drawField = (state = initialState, action) => {
@@ -14,7 +14,7 @@ const drawField = (state = initialState, action) => {
     case 'CHANGE_CURRENT_COLOR':
       return {
         ...state,
-        currentColor: action.payload.color,
+        currentColor: action.payload.color
       };
     // ******** START DRAW FUNCTIONAL **********************
     case 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY':
@@ -29,21 +29,19 @@ const drawField = (state = initialState, action) => {
         }
       }
       if (state.brush === 'fillPart') {
-        if (action.payload.index >= 0) {
-          const newField = fillParticip(
-            JSON.stringify(state.field),
-            action.payload.index,
-            10,
-            state.fieldSize,
-            state.field[action.payload.index].color,
-            state.currentColor
-          );
-          return {
-            ...state,
-            field: newField,
-          };
-        }
-        return state;
+        let size = state.fieldSize === 100 ? 10 : state.fieldSize === 400 ? 20 : 40;
+        const newField = fillParticip(
+          JSON.stringify(state.field),
+          action.payload.index,
+          size,
+          state.fieldSize,
+          state.field[action.payload.index].color,
+          state.currentColor
+        );
+        return {
+          ...state,
+          field: newField
+        };
       }
 
       const brushFill = (index, brush, size, array) => {
@@ -98,12 +96,12 @@ const drawField = (state = initialState, action) => {
       };
 
       copyField = brushFill(action.payload.index, state.brush, state.fieldSize, [
-        ...state.field,
+        ...state.field
       ]);
       return {
         ...state,
         field: copyField,
-        historyColor: [...new Set(copyHistoryColor)],
+        historyColor: [...new Set(copyHistoryColor)]
       };
 
     // end draw brush
@@ -111,7 +109,7 @@ const drawField = (state = initialState, action) => {
       return {
         ...state,
         field: new Array(state.fieldSize).fill({ color: '#ffffff' }),
-        brush: 'dot',
+        brush: 'dot'
       };
     case 'DELETE_COLOR_HISTORY':
       return {
@@ -148,17 +146,17 @@ const drawField = (state = initialState, action) => {
     case 'CHANGE_BRUSH':
       return {
         ...state,
-        brush: action.payload.brush,
+        brush: action.payload.brush
       };
     case 'SWITCH_COLOR':
       return {
-        ...state,
+        ...state
       };
 
     case 'ADD_DRAW_TO_HISTORY':
       return {
         ...state,
-        drawHistory: [...state.drawHistory, action.payload],
+        drawHistory: [...state.drawHistory, action.payload]
       };
     case 'GET_DRAW_FROM_HISTORY':
       return { ...state, ...state.drawHistory[action.payload.index] };

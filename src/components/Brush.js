@@ -69,8 +69,9 @@ function Brush(props) {
     </div>
   );
 }
+
 const mapStateToProps = (state) => ({
-  brush: state.brush,
+  brush: state.brush
 });
 
 const mapDispatchToProps = (dispatch) => ({
