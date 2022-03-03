@@ -6,7 +6,6 @@ import ColorHisory from './ColorHistory';
 import FieldSize from './FieldSize';
 import DrawHistory from './DrawHistory';
 import domtoimage from 'dom-to-image';
-import { v4 as uuidv4 } from 'uuid';
 import ColorChanger from './ColorChanger';
 import CurrentColor from './CurrentColor';
 
@@ -91,7 +90,7 @@ const Field = (props) => {
           id="capture"
           style={{
             width: fieldSize + 'px',
-            height: fieldSize + 'px',
+            height: fieldSize + 'px'
           }}
           onMouseDown={onKeyPressed}
           onMouseUp={onKeyUp}
@@ -106,16 +105,16 @@ const Field = (props) => {
                 background: el.color,
                 width: pixelSize + '%',
                 height: pixelSize + '%',
-                border: gridMap ? '1px solid lightgrey' : '',
+                border: gridMap ? '1px solid lightgrey' : ''
               }}
               onClick={() => changePixelColor(i)}
               onMouseOver={
-                props.brush !== 'fill'
+                props.brush !== 'fill' && props.brush !== 'fillPart'
                   ? () => changePixelColor(continueToDraw ? i : undefined)
                   : null
               }
             >
-              {}
+              {i}
             </div>
           ))}
         </div>
@@ -130,7 +129,7 @@ const Field = (props) => {
 const mapStateToProps = (state) => ({
   field: state.field,
   pixelSize: state.pixelSize,
-  brush: state.brush,
+  brush: state.brush
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -138,14 +137,15 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({
       type: 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY',
       payload: {
-        index,
-      },
+        index
+      }
     }),
   clearField: () =>
     dispatch({
       type: 'CLEAR_FIELD',
-      payload: {},
-    }),
+      payload: {}
+    })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Field);
+

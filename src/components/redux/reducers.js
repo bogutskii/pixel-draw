@@ -6,7 +6,7 @@ const initialState = {
   currentColor: '#000000',
   brush: 'dot',
   drawHistory: [],
-  username: 'unknown'
+  username: 'unknown123'
 };
 
 const drawField = (state = initialState, action) => {
@@ -86,13 +86,15 @@ const drawField = (state = initialState, action) => {
           range = [index, index];
         }
 
-        return array.map((el, i) => ((i >= range[0] && i <= range[1])
-        || (checkList.includes(i) && checkList.length > 0)
-          ? {
-            ...el,
-            color: state.currentColor
-          }
-          : el));
+        return array.map((el, i) =>
+          (i >= range[0] && i <= range[1]) ||
+          (checkList.includes(i) && checkList.length > 0)
+            ? {
+              ...el,
+              color: state.currentColor
+            }
+            : el
+        );
       };
 
       copyField = brushFill(action.payload.index, state.brush, state.fieldSize, [
@@ -192,7 +194,7 @@ const drawField = (state = initialState, action) => {
 };
 
 function fillParticip(arrJSON, current, size, max, oldColor, newColor) {
-  console.log(arrJSON, current, size, max, oldColor, newColor);
+  console.log(current, size, oldColor);
   const a = JSON.parse(arrJSON);
   if (oldColor === newColor) return a;
 
@@ -200,18 +202,19 @@ function fillParticip(arrJSON, current, size, max, oldColor, newColor) {
   const stop = [];
 
   function ch(current) {
-    console.log(current);
     if (a[current] && a[current].color === oldColor) {
       a[current].color = newColor;
       stop.push(current);
-      let up;
-      let down;
-      let left;
-      let right;
-      up = current - size;
-      down = current + size;
-      left = current - 1;
-      right = current + 1;
+      let up = current - size;
+      let down = current + size;
+      let left = current - 1;
+      let right = current + 1;
+      if (right % size === 0) {
+        stop.push(right);
+      }
+      if (left % size === size - 1) {
+        stop.push(left);
+      }
       next.push(
         ...[up, down, left, right].filter(
           (e) => e >= 0 && !stop.includes(e) && !next.includes(e) && e <= max
