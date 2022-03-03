@@ -114,7 +114,7 @@ const Field = (props) => {
                   : null
               }
             >
-              {i}
+              {}
             </div>
           ))}
         </div>
