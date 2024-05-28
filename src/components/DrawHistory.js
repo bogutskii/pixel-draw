@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { addDrawToHistory, deleteDraw, getDraws } from './/redux/actions';
+import { addDrawToHistory, deleteDraw, getDraws } from './redux/actions';
 import Preloader from './preloader/Preloader';
 
 const DrawHistory = (props) => {
   useEffect(() => {
     props.getDraws();
   }, []);
-
-  // useEffect(() => {
-  //   props.addDrawToHistory(historyList);
-  // }, []);
 
   const [inputName, setInputName] = useState('');
   const { historyList, getFromHistory, pixelSize, field, fieldSize, username } = props;
@@ -38,6 +34,7 @@ const DrawHistory = (props) => {
       props.deleteDraw(id);
     }
   };
+
   return (
     <div className="drawHistory">
       <form className="form-inline">
@@ -48,11 +45,11 @@ const DrawHistory = (props) => {
           size="17"
           onChange={(e) => setInputName(e.target.value)}
         />
-        <button onClick={saveNameInList} className="btn-reg mg-0-a">
+        <button type="button" onClick={saveNameInList} className="btn-reg mg-0-a">
           Save
         </button>
       </form>
-      {historyList.length ? (
+      {Array.isArray(historyList) && historyList.length ? (
         <ul className="list-ul">
           {historyList.map((item, i) => (
             <li className="list-li" key={item._id}>
@@ -60,16 +57,10 @@ const DrawHistory = (props) => {
                 <div className="child-grow" onClick={() => getFromHistory(i)}>
                   {item.name + ' ' + item.username}
                 </div>
-
                 <div>
-                  {/*{username === item.username && (*/}
-                  <button
-                    className="btn"
-                    onClick={() => deleteDrawReq(item._id, item.username)}
-                  >
+                  <button className="btn" onClick={() => deleteDrawReq(item._id, item.username)}>
                     X
                   </button>
-                  {/*)}*/}
                 </div>
               </div>
             </li>
@@ -81,6 +72,7 @@ const DrawHistory = (props) => {
     </div>
   );
 };
+
 const mapStateToProps = (state) => ({
   historyList: state.drawHistory,
   field: state.field,
@@ -100,7 +92,6 @@ const mapDispatchToProps = (dispatch) => ({
         index
       }
     })
-  //getDraw: () => dispatch(getDraw()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrawHistory);

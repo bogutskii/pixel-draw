@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './Field.css';
 import Brush from './Brush';
-import ColorHisory from './ColorHistory';
+import ColorHistory from './ColorHistory';
 import FieldSize from './FieldSize';
 import DrawHistory from './DrawHistory';
 import domtoimage from 'dom-to-image';
@@ -14,14 +14,14 @@ const Field = (props) => {
   const [gridMap, setGridMap] = useState(true);
   const [fieldSize, setFieldSize] = useState('800');
 
-  const { field, currentColor, changeColor, changePixelColor, clearField, pixelSize } =
-    props;
+  const { field, currentColor, changeColor, changePixelColor, clearField, pixelSize } = props;
 
   const onKeyPressed = (e) => {
     if (e.code === 'Space' || e.type === 'mousedown') {
       setContinueToDraw(true);
     }
   };
+
   const onKeyUp = (e) => {
     if (e.code === 'Space' || e.type === 'mouseup') {
       setContinueToDraw(false);
@@ -42,14 +42,14 @@ const Field = (props) => {
   return (
     <div className="wrap-app">
       <div>
-        {/*Tools*/}
+        {/* Tools */}
         <FieldSize />
         <Brush />
-        <ColorHisory />
+        <ColorHistory />
         <ColorChanger />
         <CurrentColor />
         <div>
-          {/*Range field size*/}
+          {/* Range field size */}
           <label>{fieldSize} px</label>
           <input
             type="range"
@@ -62,12 +62,11 @@ const Field = (props) => {
             width="800px"
           />
         </div>
-        {/*Grid map ON/OFF*/}
+        {/* Grid map ON/OFF */}
         <div className="grid-Map mg-10 vert-middle">
           <label className="switch">
             <input
               type="checkbox"
-              value={gridMap}
               checked={gridMap}
               onChange={() => setGridMap(!gridMap)}
             />
@@ -82,12 +81,11 @@ const Field = (props) => {
           Download
         </button>
       </div>
-      {/*FIELD DRAW*/}
+      {/* FIELD DRAW */}
       <div>
         <div
-          id={'capture'}
-          className="grid"
           id="capture"
+          className="grid"
           style={{
             width: fieldSize + 'px',
             height: fieldSize + 'px'
@@ -136,9 +134,7 @@ const mapDispatchToProps = (dispatch) => ({
   changePixelColor: (index) =>
     dispatch({
       type: 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY',
-      payload: {
-        index
-      }
+      payload: { index }
     }),
   clearField: () =>
     dispatch({
@@ -148,4 +144,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Field);
-

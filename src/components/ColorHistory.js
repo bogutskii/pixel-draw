@@ -1,28 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 import history_del from './icons/history_del.png';
 
-const HistoryColor = (props) => {
-  const { historyColor, changeColor, deleteColorHistory } = props;
-
+const HistoryColor = ({ historyColor, changeColor, deleteColorHistory }) => {
   return (
     <div className="container">
       <div className="color-history">
-        {historyColor.map((el, i) => (
+        {historyColor.map((color, index) => (
           <div
-            key={uuidv4()}
+            key={index}
             className="pixel-history"
-            style={{ background: el }}
-            onClick={() => changeColor(el)}
+            style={{ background: color }}
+            onClick={() => changeColor(color)}
           >
             {' '}
           </div>
         ))}
-
         <div>
           <button onClick={deleteColorHistory} className="btn-reg warn">
-            <img src={history_del} className="img-icon-btn" />
+            <img src={history_del} className="img-icon-btn" alt="delete history" />
           </button>
         </div>
       </div>
@@ -38,11 +34,9 @@ const mapDispatchToProps = (dispatch) => ({
   changeColor: (color) =>
     dispatch({
       type: 'CHANGE_CURRENT_COLOR',
-      payload: {
-        color,
-      },
+      payload: { color },
     }),
-  deleteColorHistory: (color) =>
+  deleteColorHistory: () =>
     dispatch({
       type: 'DELETE_COLOR_HISTORY',
     }),

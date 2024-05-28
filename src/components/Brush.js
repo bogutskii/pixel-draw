@@ -1,74 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 import fill from './icons/fill.png';
 import random from './icons/random.jpeg';
 import colorpicker from './icons/colorpicker.png';
 
-function Brush(props) {
-  const { changeBrush, fieldRandomBrush, brush } = props;
+const Brush = ({ changeBrush, fieldRandomBrush, brush }) => {
+  const brushTypes = [
+    { type: 'dot', label: '▣' },
+    { type: 'horizontal', label: '↔' },
+    { type: 'vertical', label: '↕' },
+    { type: 'cross', label: '✚' },
+    { type: 'fill', label: <img src={fill} className="img-icon-btn" alt="icon-fill" /> },
+    { type: 'fillPart', label: 'fillPart' },
+    { type: 'mirrorH', label: '═' },
+    { type: 'mirrorV', label: '||' },
+    { type: 'color-picker', label: <img src={colorpicker} className="img-icon-btn" alt="icon-colorpicker" /> }
+  ];
+
   return (
     <div className="brush-block">
-      <button
-        className={`btn-reg ${brush === 'dot' ? 'btn-pushed' : ''}`}
-        onClick={() => changeBrush('dot')}
-      >
-        ▣
-      </button>
-      <button
-        className={`btn-reg ${brush === 'horizontal' ? 'btn-pushed' : ''}`}
-        onClick={() => changeBrush('horizontal')}
-      >
-        ↔
-      </button>
-      <button
-        className={`btn-reg ${brush === 'vertical' ? 'btn-pushed' : ''}`}
-        onClick={() => changeBrush('vertical')}
-      >
-        ↕
-      </button>
-      <button
-        className={`btn-reg ${brush === 'cross' ? 'btn-pushed' : ''}`}
-        onClick={() => changeBrush('cross')}
-      >
-        ✚
-      </button>
-      <button
-        className={`btn-reg ${brush === 'fill' ? 'btn-pushed' : ''}`}
-        onClick={() => changeBrush('fill')}
-      >
-        <img src={fill} className="img-icon-btn" alt="icon-fill" />
-      </button>
-      <button
-        className={`btn-reg ${brush === 'fillPart' ? 'btn-pushed' : ''}`}
-        onClick={() => changeBrush('fillPart')}
-      >
-        fillPart
-        {/* <img src={fill} className="img-icon-btn" /> */}
-      </button>
-      <button
-        className={`btn-reg ${brush === 'mirrorH' ? 'btn-pushed' : ''}`}
-        onClick={() => changeBrush('mirrorH')}
-      >
-        ═
-      </button>
-      <button
-        className={`btn-reg ${brush === 'mirrorV' ? 'btn-pushed' : ''}`}
-        onClick={() => changeBrush('mirrorV')}
-      >
-        ||
-      </button>
-      <button
-        className={`btn-reg ${brush === 'color-picker' ? 'btn-pushed' : ''}`}
-        onClick={() => changeBrush('color-picker')}
-      >
-        <img src={colorpicker} className="img-icon-btn" alt="icon-colorpicker" />
-      </button>
+      {brushTypes.map(({ type, label }) => (
+        <button
+          key={type}
+          className={classnames('btn-reg', { 'btn-pushed': brush === type })}
+          onClick={() => changeBrush(type)}
+        >
+          {label}
+        </button>
+      ))}
       <button className="btn-reg" onClick={fieldRandomBrush}>
         <img src={random} className="img-icon-btn" alt="icon-random" />
       </button>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   brush: state.brush
@@ -77,9 +43,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeBrush: (brush) => dispatch({
     type: 'CHANGE_BRUSH',
-    payload: {
-      brush
-    }
+    payload: { brush }
   }),
   fieldRandomBrush: () => dispatch({
     type: 'FILL_RANDOM_BRUSH',
