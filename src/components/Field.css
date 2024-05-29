@@ -1,141 +1,147 @@
 .grid {
-  border: 3px solid black;
-  width: 1000px;
-  height: 1000px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: stretch;
-  margin: 0 auto;
+    border: 3px solid black;
+    width: 1000px;
+    height: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    margin: 0 auto;
 }
 
 .pixel {
-  width: 10%;
-  height: 10%;
-  box-sizing: border-box;
+    width: 10%;
+    height: 10%;
+    box-sizing: border-box;
 }
 
 .color-history {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: stretch;
-  width: 600px
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    width: 600px
 }
 
 .pixel-history {
-  width: 35px;
-  height: 35px;
-  /*border: 1px solid #b7c8e7;*/
-  margin: 1px;
+    width: 35px;
+    height: 35px;
+
+    margin: 1px;
 }
 
 .btn-brush {
-  font-size: 1vw;
+    font-size: 1vw;
 }
 
 .brush-block {
-  margin: 10px;
+    margin: 10px;
 }
 
 .draw-history-item {
-  cursor: pointer;
-  margin: 5px;
+    cursor: pointer;
+    margin: 5px;
 }
 
 /*font size*/
 :root {
-  --primary-color: #185ee0;
-  --secondary-color: #e6eef9;
+    --primary-color: #185ee0;
+    --secondary-color: #e6eef9;
 }
-*,
-*:after,
-*:before {
-  box-sizing: border-box;
+
+*, *:after, *:before {
+    box-sizing: border-box;
 }
+
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: rgba(230, 238, 249, 0.5);
+    font-family: 'Inter', sans-serif;
+    background-color: rgba(230, 238, 249, 0.5);
 }
+
 .container {
-  justify-content: center;
-  display: flex;
-  align-items: center;
-margin: 5px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin: 5px;
 }
+
 .tabs {
-  display: flex;
-  position: relative;
-  background-color: #fff;
-  box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
-
-  border-radius: 3px;
+    display: flex;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+    border-radius: 3px;
 }
+
 .tabs * {
-  z-index: 2;
+    z-index: 2;
 }
+
 input[type='radio'] {
-  display: none;
+    display: none;
 }
+
 .tab {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 54px;
-  width: 200px;
-  font-size: 1.25rem;
-  font-weight: 500;
-  border-radius: 3px;
-  /*// just a high number to create pill effect*/
-  cursor: pointer;
-  transition: color 0.15s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 54px;
+    width: 200px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: color 0.15s ease-in;
 }
+
 .notification {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  margin-left: 0.75rem;
-  border-radius: 50%;
-  background-color: var(--secondary-color);
-  transition: 0.15s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0.75rem;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    transition: 0.15s ease-in;
 }
+
 input[type='radio']:checked + label {
-  color: var(--primary-color);
+    color: var(--primary-color);
 }
+
 input[type='radio']:checked + label > .notification {
-  background-color: var(--primary-color);
-  color: #fff;
+    background-color: var(--primary-color);
+    color: #fff;
 }
+
 input[id='radio-1']:checked ~ .glider {
-  transform: translateX(0);
+    transform: translateX(0);
 }
+
 input[id='radio-2']:checked ~ .glider {
-  transform: translateX(100%);
+    transform: translateX(100%);
 }
+
 input[id='radio-3']:checked ~ .glider {
-  transform: translateX(200%);
+    transform: translateX(200%);
 }
+
 .glider {
-  position: absolute;
-  display: flex;
-  height: 54px;
-  width: 200px;
-  background-color: var(--secondary-color);
-  z-index: 1;
-  border-radius: 3px;
-  /*// just a high number to create pill effect*/
-  transition: 0.25s ease-out;
+    position: absolute;
+    display: flex;
+    height: 54px;
+    width: 200px;
+    background-color: var(--secondary-color);
+    z-index: 1;
+    border-radius: 3px;
+    transition: 0.25s ease-out;
 }
+
 @media (max-width: 700px) {
-  .tabs {
-    transform: scale(0.6);
-  }
+    .tabs {
+        transform: scale(0.6);
+    }
 }
 
-/*--end field size--*/
-
-.vert-middle{
-  line-height: 35px;
+.vert-middle {
+    line-height: 35px;
 }
-
-
