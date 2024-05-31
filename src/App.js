@@ -1,5 +1,5 @@
 import './styles.css';
-import Field from './components/Field.js';
+import Field from './components/Field/Field.js';
 import { connect } from 'react-redux';
 import { Header } from './components/Header';
 

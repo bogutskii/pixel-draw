@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-const ColorChanger = (props) => {
+const ColorChanger = () => {
   return (
     <div className="mg-10">
       <br />

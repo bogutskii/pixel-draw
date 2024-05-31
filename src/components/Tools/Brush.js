@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import fill from './icons/fill.png';
-import random from './icons/random.jpeg';
-import colorpicker from './icons/colorpicker.png';
+import fill from '../icons/fill.png';
+import random from '../icons/random.jpeg';
+import colorpicker from '../icons/colorpicker.png';
 
 const Brush = ({ changeBrush, fieldRandomBrush, brush }) => {
   const brushTypes = [

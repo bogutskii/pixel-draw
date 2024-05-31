@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './Field.css';
-import Brush from './Brush';
-import ColorHistory from './ColorHistory';
+import Brush from '../Tools/Brush';
+import ColorHistory from '../Tools/ColorHistory';
 import FieldSize from './FieldSize';
-import DrawHistory from './DrawHistory';
+import DrawHistory from '../DrawHistory';
 import domtoimage from 'dom-to-image';
-import ColorChanger from './ColorChanger';
-import CurrentColor from './CurrentColor';
+import ColorChanger from '../Tools/ColorChanger';
+import CurrentColor from '../Tools/CurrentColor';
 
 const Field = (props) => {
   const [continueToDraw, setContinueToDraw] = useState(false);
   const [gridMap, setGridMap] = useState(true);
   const [fieldSize, setFieldSize] = useState('800');
 
-  const { field, currentColor, changeColor, changePixelColor, clearField, pixelSize } = props;
+  const { field, changePixelColor, clearField, pixelSize } = props;
 
   const onKeyPressed = (e) => {
     if (e.code === 'Space' || e.type === 'mousedown') {

@@ -2,7 +2,6 @@
     font-family: sans-serif;
     text-align: center;
 }
-/* checkbox square slider start */
 .switch {
     position: relative;
     display: inline-block;
@@ -47,8 +46,6 @@ input:checked + .slider:before {
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
-/* checkbox square slider end */
-/*list history */
 .drawHistory {
     margin-left: 10px;
     width: 56%;
@@ -107,7 +104,7 @@ input:checked + .slider:before {
     vertical-align: middle;
 }
 .btn-reg {
-    box-shadow: inset 0px 1px 0px 0px #dcecfb;
+    box-shadow: inset 0 1px 0 0 #dcecfb;
     background: linear-gradient(to bottom, #ddf2fc 5%, rgba(179, 214, 255, 0.65) 100%);
     background-color: #d5eaff;
     border-radius: 6px;
@@ -167,7 +164,6 @@ input:checked + .slider:before {
     top: 50%;
     margin: auto;
 }
-/* HEADER */
 @import url(https://fonts.googleapis.com/css?family=Baumans);
 html {
     background: #ecf0f1;
@@ -184,7 +180,6 @@ input {
     text-transform: uppercase;
     cursor: pointer;
 }
-/* ----------- */
 header {
     position: relative;
     height: 50px;
@@ -198,7 +193,6 @@ h1 {
         font-family: 'Arial', sans-serif;
         text-align: center;
     }
-    /* Switch button styling */
     .switch {
         position: relative;
         display: inline-block;
@@ -239,7 +233,6 @@ h1 {
     input:checked + .slider:before {
         transform: translateX(26px);
     }
-    /* Styling for list items */
     .list-li {
         background: #f1fdff;
         border: 1px solid #abcdbd;
@@ -258,7 +251,6 @@ h1 {
         background: #e6f8ff;
         border: 1px solid #06acd5;
     }
-    /* General button styling */
     .btn {
         color: #000;
         background-color: rgba(239, 115, 115, .87);
@@ -274,7 +266,6 @@ h1 {
     .btn:active {
         background-color: rgba(195, 75, 75, .95);
     }
-    /* Input styling */
     .input-save {
         width: 100%;
         padding: 5px;
@@ -284,7 +275,6 @@ h1 {
         color: black;
         border-radius: 5px;
     }
-    /* Header styling */
     .header {
         background-color: #2c3e50;
         color: white;
@@ -325,7 +315,7 @@ header input:focus {
 header input[type='submit'] {
     font-weight: bold;
 }
-input[type="text"]:focus::placeholder,input[type="password"]:focus::placeholder,input[type="email"]:focus::placeholder {
+input[type="text"]:focus::placeholder, input[type="password"]:focus::placeholder, input[type="email"]:focus::placeholder {
     color: #b2f8f2;
     opacity: 1;
 }
@@ -334,12 +324,10 @@ input[type="text"]:focus::placeholder,input[type="password"]:focus::placeholder,
         display: none;
     }
 }
-/* ------END HEADER----- */
 .draw-history-wrap {
     display: flex;
     width: 450px;
 }
-/* input type color */
 input[type='color'] {
     -webkit-appearance: none;
     border: none;
@@ -352,11 +340,9 @@ input[type='color']::-webkit-color-swatch-wrapper {
 input[type='color']::-webkit-color-swatch {
     border: none;
 }
-/*range field size*/
 .range-field-size {
     width: 300px;
 }
-/*preloader*/
 :root {
     --fg: #17181c;
     --c1: #f42f25;
@@ -368,11 +354,11 @@ input[type='color']::-webkit-color-swatch {
 .pl3 {
     justify-content: space-between;
 }
-.pl3__a,.pl3__b,.pl3__c,.pl3__d {
+.pl3__a, .pl3__b, .pl3__c, .pl3__d {
     width: 0.75em;
     height: 0.75em;
 }
-.pl3__a,.pl3__b,.pl3__c,.pl3__d {
+.pl3__a, .pl3__b, .pl3__c, .pl3__d {
     animation: bounce3 2s ease-in-out infinite;
     transform-origin: 50% 0;
 }
@@ -397,35 +383,32 @@ input[type='color']::-webkit-color-swatch {
     background: var(--c4);
     animation-delay: 0.3s;
 }
-/* Animations */
 @keyframes bounce3 {
-    from,5%,95%,to {
+    from, 5%, 95%, to {
         transform: translateY(0) scaleY(1);
     }
     16.7% {
         transform: translateY(0) scaleY(8);
     }
-    28.3%,38.3% {
+    28.3%, 38.3% {
         transform: translateY(5.25em) scaleY(1);
     }
     50% {
         transform: translateY(2.625em) scaleY(4.5);
     }
-    61.7%,71.7% {
+    61.7%, 71.7% {
         transform: translateY(2.625em) scaleY(1);
     }
     83.3% {
         transform: translateY(0) scaleY(4.5);
     }
 }
-/*color picker*/
-/* Custom poiners */
 .custom-pointers .react-colorful__saturation-pointer {
     width: 16px;
     height: 16px;
     border-radius: 3px;
 }
-.custom-pointers .react-colorful__hue-pointer,.custom-pointers .react-colorful__alpha-pointer {
+.custom-pointers .react-colorful__hue-pointer, .custom-pointers .react-colorful__alpha-pointer {
     width: 16px;
     border-radius: 3px;
 }
@@ -490,7 +473,6 @@ input[type='color']::-webkit-color-swatch {
     max-width: 500px;
     width: 100%;
 }
-
 .header {
     background-color: #2c3e50;
     color: white;
@@ -637,7 +619,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     max-width: 500px;
     width: 100%;
 }
-
 html, body {
     background: #ecf0f1;
     font-family: 'Arial', sans-serif;
@@ -707,7 +688,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     max-width: 500px;
     width: 100%;
 }
-
 html, body {
     background: #ecf0f1;
     font-family: 'Arial', sans-serif;
@@ -778,7 +758,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     max-width: 400px;
     width: 100%;
 }
-
 .register-form {
     flex-direction: column;
     align-items: center;

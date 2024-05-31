@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import history_del from './icons/history_del.png';
+import history_del from '../icons/history_del.png';
 
 const HistoryColor = ({ historyColor, changeColor, deleteColorHistory }) => {
   return (

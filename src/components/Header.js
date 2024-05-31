@@ -1,8 +1,8 @@
 // Header.js
 import React, { useState } from 'react';
-import { useAuth } from './AuthContext';
-import LoginModal from './LoginModal';
-import RegisterModal from './RegisterModal';
+import { useAuth } from './Auth/AuthContext';
+import LoginModal from './Auth/LoginModal';
+import RegisterModal from './Auth/RegisterModal';
 
 export const Header = () => {
   const { user, logout } = useAuth();
