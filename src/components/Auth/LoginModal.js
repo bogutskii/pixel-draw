@@ -1,8 +1,7 @@
-// LoginModal.js
 import React, { useEffect } from 'react';
-import Login from './Login';
+import FlipCard from './FlipCard';
 
-const LoginModal = ({ isOpen, onClose, title }) => {
+const LoginModal = ({ isOpen, onClose }) => {
   const handleOutsideClick = (e) => {
     if (e.target.className === 'modal-overlay') {
       onClose();
@@ -24,9 +23,7 @@ const LoginModal = ({ isOpen, onClose, title }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
-        <Login onClose={onClose} />
-      </div>
+        <FlipCard onClose={onClose} />
     </div>
   );
 };

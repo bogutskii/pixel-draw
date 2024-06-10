@@ -1,23 +1,16 @@
-// Header.js
 import React, { useState } from 'react';
 import { useAuth } from './Auth/AuthContext';
 import LoginModal from './Auth/LoginModal';
-import RegisterModal from './Auth/RegisterModal';
 
 export const Header = () => {
   const { user, logout } = useAuth();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
   const toggleLoginModal = () => {
     setIsLoginModalOpen(!isLoginModalOpen);
     if (isRegisterModalOpen) setIsRegisterModalOpen(false);
   };
 
-  const toggleRegisterModal = () => {
-    setIsRegisterModalOpen(!isRegisterModalOpen);
-    if (isLoginModalOpen) setIsLoginModalOpen(false);
-  };
 
   return (
     <header className="header">
@@ -30,11 +23,9 @@ export const Header = () => {
       ) : (
         <div>
           <button onClick={toggleLoginModal}>Login</button>
-          <button onClick={toggleRegisterModal}>Register</button>
         </div>
       )}
       {isLoginModalOpen && <LoginModal isOpen={isLoginModalOpen} onClose={toggleLoginModal} title={'Login'}/>}
-      {isRegisterModalOpen && <RegisterModal isOpen={isRegisterModalOpen} onClose={toggleRegisterModal} title={'Register'}/>}
     </header>
   );
 };
