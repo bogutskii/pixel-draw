@@ -33,8 +33,8 @@ export const Header = () => {
           <button onClick={toggleRegisterModal}>Register</button>
         </div>
       )}
-      {isLoginModalOpen && <LoginModal isOpen={isLoginModalOpen} onClose={toggleLoginModal} />}
-      {isRegisterModalOpen && <RegisterModal isOpen={isRegisterModalOpen} onClose={toggleRegisterModal} />}
+      {isLoginModalOpen && <LoginModal isOpen={isLoginModalOpen} onClose={toggleLoginModal} title={'Login'}/>}
+      {isRegisterModalOpen && <RegisterModal isOpen={isRegisterModalOpen} onClose={toggleRegisterModal} title={'Register'}/>}
     </header>
   );
 };

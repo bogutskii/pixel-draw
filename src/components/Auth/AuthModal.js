@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Register from './Register';
 
 const AuthModal = ({ isOpen, onClose }) => {
-  const [isLogin, setIsLogin] = useState(true);
-
   const handleOutsideClick = (e) => {
     if (e.target.className === 'modal-overlay') {
       onClose();

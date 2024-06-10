@@ -1,4 +1,3 @@
-// Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -18,32 +17,36 @@ const Register = ({ onClose }) => {
   };
 
   return (
-    <div className="modal-content">
-      <form className="register-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <form className="register-form" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        className="form-input"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+      <label className="form-label">Username</label>
+
+      <input
+        type="email"
+        className="form-input"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <label className="form-label">Email</label>
+
+      <input
+        type="password"
+        className="form-input"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <label className="form-label">Password</label>
+
+      <button type="submit">Register</button>
+    </form>
   );
 };
 

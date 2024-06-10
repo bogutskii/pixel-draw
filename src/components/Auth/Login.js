@@ -19,7 +19,7 @@ const Login = ({ onClose }) => {
     }
   };
 
-  return (
+  return (<div>
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -37,6 +37,7 @@ const Login = ({ onClose }) => {
       />
       <button type="submit">Login</button>
     </form>
+    </div>
   );
 };
 

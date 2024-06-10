@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import Login from './Login';
 
-const LoginModal = ({ isOpen, onClose }) => {
+const LoginModal = ({ isOpen, onClose, title }) => {
   const handleOutsideClick = (e) => {
     if (e.target.className === 'modal-overlay') {
       onClose();
