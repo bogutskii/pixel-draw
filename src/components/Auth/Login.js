@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/users/login', { username, password });
+      const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.REACT_APP_SECRET_KEY).toString();
+      const response = await axios.post(`${process.env.REACT_APP_API_URL_LOCAL}/users/login`, { username, password: encryptedPassword });
       localStorage.setItem('token', response.data.token);
-      // handle login success
+      setMessage('Login successful');
     } catch (error) {
-      console.error('Login Error:', error.response ? error.response.data : error.message);
+      setMessage(error.response ? error.response.data.error : error.message);
     }
   };
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit} >
+    <form className="auth-form" onSubmit={handleSubmit}>
       <div className="input-container">
         <input
           type="text"
@@ -39,6 +42,7 @@ const Login = () => {
         <label className="form-label">Password</label>
       </div>
       <button type="submit" className="submit-button">Login</button>
+      {message && <p>{message}</p>}
     </form>
   );
 };
