@@ -14,14 +14,14 @@ const FlipCard = () => {
     <div className="flip-card-container">
       <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
         <div className="flip-card-front">
-          <h2>Login</h2>
+          <h2 className='flip-card-title'>Login</h2>
           <Login />
           <p className="toggle-link" onClick={handleFlip}>
             Don't have an account? Register here
           </p>
         </div>
         <div className="flip-card-back">
-          <h2>Register</h2>
+          <h2 className='flip-card-title'>Register</h2>
           <Register />
           <p className="toggle-link" onClick={handleFlip}>
             Already have an account? Login here

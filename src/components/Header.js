@@ -8,7 +8,6 @@ export const Header = () => {
 
   const toggleLoginModal = () => {
     setIsLoginModalOpen(!isLoginModalOpen);
-    if (isRegisterModalOpen) setIsRegisterModalOpen(false);
   };
 
 

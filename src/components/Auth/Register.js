@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/auth/register', { username, password, email });
-      // handle registration success
+      const encryptedPassword = CryptoJS.AES.encrypt(password, 'secret_key').toString();
+      const response = await axios.post('http://localhost:8000/users/register', { username, password: encryptedPassword, email });
+      setMessage('User registered successfully');
+      setMessageType('success');
+      setUsername('');
+      setPassword('');
+      setEmail('');
     } catch (error) {
-      console.error('Registration Error:', error.response ? error.response.data : error.message);
+      setMessage(error.response ? error.response.data.error : error.message);
+      setMessageType('error');
     }
   };
 
@@ -21,7 +30,7 @@ const Register = () => {
       <div className="input-container">
         <input
           type="text"
-          className="input-field"
+          className={`input-field ${username && 'filled'}`}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
@@ -31,7 +40,7 @@ const Register = () => {
       <div className="input-container">
         <input
           type="email"
-          className="input-field"
+          className={`input-field ${email && 'filled'}`}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -41,7 +50,7 @@ const Register = () => {
       <div className="input-container">
         <input
           type="password"
-          className="input-field"
+          className={`input-field ${password && 'filled'}`}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -49,6 +58,7 @@ const Register = () => {
         <label className="form-label">Password</label>
       </div>
       <button type="submit" className="submit-button">Register</button>
+      {message && <p className={`message ${messageType}`}>{message}</p>}
     </form>
   );
 };
