@@ -12,7 +12,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.REACT_APP_SECRET_KEY).toString();
+      const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.REACT_APP_JWT_SECRET).toString();
       const response = await axios.post(`${process.env.REACT_APP_API_URL_LOCAL}/users/register`, { username, password: encryptedPassword, email });
       setMessage('User registered successfully');
       setMessageType('success');
