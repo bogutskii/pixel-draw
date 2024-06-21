@@ -1,7 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Baumans);
 body, html {
     margin: 0;
-    padding: 0
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .block, .item_wrap {
@@ -32,11 +33,13 @@ button:focus, input {
     outline: 0
 }
 
-.btn, .btn-reg, .list-li:hover, .slider, .submit, .submit-button, .toggle-button, button {
+.btn, .btn-reg, .list-li:hover, .slider, .submit, .submit-button, .toggle-button, button{
     cursor: pointer
 }
-
-.modal-overlay, .slider {
+.logo{
+    cursor: pointer;
+}
+.slider {
     left: 0;
     right: 0;
     bottom: 0;
@@ -59,7 +62,6 @@ input:checked + .slider:before {
 
 .drawHistory {
     margin-left: 10px;
-    width: 56%
 }
 
 .mg-10 {

@@ -6,7 +6,10 @@ const initialState = {
   currentColor: '#000000',
   brush: 'dot',
   drawHistory: [],
-  username: 'Guest'
+  username: 'Guest',
+  user: null,
+  token: localStorage.getItem('accessToken') || null,
+  authError: null,
 };
 
 const drawField = (state = initialState, action) => {
@@ -155,10 +158,10 @@ const drawField = (state = initialState, action) => {
         ...state
       };
 
-    case 'ADD_DRAW_TO_HISTORY':
+    case 'ADD_DRAW_TO_HISTORY_SUCCESS':
       return {
         ...state,
-        drawHistory: [...state.drawHistory, action.payload]
+        drawHistory: [...state.drawHistory, action.payload],
       };
     case 'GET_DRAW_FROM_HISTORY':
       return { ...state, ...state.drawHistory[action.payload.index] };
@@ -187,6 +190,32 @@ const drawField = (state = initialState, action) => {
       return {
         ...state,
         field: randomField
+      };
+    case 'REGISTER_USER_SUCCESS':
+    case 'LOGIN_USER_SUCCESS':
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token,
+        authError: null,
+      };
+    case 'REGISTER_USER_FAIL':
+    case 'LOGIN_USER_FAIL':
+      return {
+        ...state,
+        authError: action.payload,
+      };
+    case 'LOGOUT_USER':
+      return {
+        ...state,
+        user: null,
+        token: null,
+        authError: null,
+      };
+    case 'REFRESH_TOKEN_SUCCESS':
+      return {
+        ...state,
+        token: action.payload,
       };
     default:
       return state;

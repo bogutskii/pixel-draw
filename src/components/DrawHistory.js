@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addDrawToHistory, deleteDraw, getDraws } from './redux/actions';
 import Preloader from './preloader/Preloader';
+import { v4 as uuidv4 } from 'uuid';
 
 const DrawHistory = (props) => {
   useEffect(() => {
@@ -17,7 +18,8 @@ const DrawHistory = (props) => {
       field: field,
       pixelSize: pixelSize,
       fieldSize: fieldSize,
-      username: username
+      username: username,
+      id: uuidv4()
     };
     props.addDrawToHistory(newDraw);
     setInputName('');
@@ -52,13 +54,13 @@ const DrawHistory = (props) => {
       {Array.isArray(historyList) && historyList.length ? (
         <ul className="list-ul">
           {historyList.map((item, i) => (
-            <li className="list-li" key={item._id}>
+            <li className="list-li" key={item.id || uuidv4()}>
               <div className="item_wrap">
                 <div className="child-grow" onClick={() => getFromHistory(i)}>
                   {item.name + ' ' + item.username}
                 </div>
                 <div>
-                  <button className="btn" onClick={() => deleteDrawReq(item._id, item.username)}>
+                  <button className="btn" onClick={() => deleteDrawReq(item.id, item.username)}>
                     X
                   </button>
                 </div>

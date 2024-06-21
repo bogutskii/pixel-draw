@@ -1,30 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Modal from '../Modal/Modal';
 import FlipCard from './FlipCard';
 
 const LoginModal = ({ isOpen, onClose }) => {
-  const handleOutsideClick = (e) => {
-    if (e.target.className === 'modal-overlay') {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('mousedown', handleOutsideClick);
-    } else {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [isOpen]);
-
-  if (!isOpen) return null;
-
   return (
-    <div className="modal-overlay">
-        <FlipCard onClose={onClose} />
-    </div>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <FlipCard onClose={onClose} />
+    </Modal>
   );
 };
 

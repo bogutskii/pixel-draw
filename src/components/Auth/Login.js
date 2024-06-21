@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import CryptoJS from 'crypto-js';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../redux/actions';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const authError = useSelector((state) => state.authError);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.REACT_APP_JWT_SECRET).toString();
-      const response = await axios.post(`${process.env.REACT_APP_API_URL_LOCAL}/users/login`, { username, password: encryptedPassword });
-      localStorage.setItem('token', response.data.token);
-      setMessage('Login successful');
-    } catch (error) {
-      setMessage(error.response ? error.response.data.error : error.message);
-    }
+    const userData = { username, password };
+    dispatch(loginUser(userData, () => navigate('/profile')));
   };
 
   return (
@@ -42,7 +40,8 @@ const Login = () => {
         <label className="form-label">Password</label>
       </div>
       <button type="submit" className="submit-button">Login</button>
-      {message && <p>{message}</p>}
+      {message && <p className="error-message">{message}</p>}
+      {authError && <p className="error-message">{authError}</p>}
     </form>
   );
 };

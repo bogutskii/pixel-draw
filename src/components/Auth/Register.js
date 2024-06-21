@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import CryptoJS from 'crypto-js';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../redux/actions';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const authError = useSelector((state) => state.authError);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.REACT_APP_JWT_SECRET).toString();
-      const response = await axios.post(`${process.env.REACT_APP_API_URL_LOCAL}/users/register`, { username, password: encryptedPassword, email });
-      setMessage('User registered successfully');
-      setMessageType('success');
-      setUsername('');
-      setPassword('');
-      setEmail('');
-    } catch (error) {
-      setMessage(error.response ? error.response.data.error : error.message);
-      setMessageType('error');
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match');
+      return;
     }
+    const userData = { username, password, email };
+    dispatch(registerUser(userData, () => navigate('/login')));
   };
 
   return (
@@ -57,8 +55,19 @@ const Register = () => {
         />
         <label className="form-label">Password</label>
       </div>
+      <div className="input-container">
+        <input
+          type="password"
+          className={`input-field ${confirmPassword && 'filled'}`}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <label className="form-label">Confirm Password</label>
+      </div>
       <button type="submit" className="submit-button">Register</button>
-      {message && <p className={`message ${messageType}`}>{message}</p>}
+      {message && <p className="error-message">{message}</p>}
+      {authError && <p className="error-message">{authError}</p>}
     </form>
   );
 };
