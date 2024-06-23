@@ -2,19 +2,24 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
-const Login = () => {
+const Login = ({ onClose }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const authError = useSelector((state) => state.authError);
+  const authError = useSelector((state) => state.auth.authError);
+  const { login } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = { username, password };
-    dispatch(loginUser(userData, () => navigate('/profile')));
+    login(userData, () => {
+      navigate('/profile');
+      onClose();
+    });
   };
 
   return (

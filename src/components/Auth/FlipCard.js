@@ -3,7 +3,7 @@ import './auth.css';
 import Login from './Login';
 import Register from './Register';
 
-const FlipCard = () => {
+const FlipCard = ({ onClose }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleFlip = () => {
@@ -15,7 +15,7 @@ const FlipCard = () => {
       <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
         <div className="flip-card-front">
           <h2 className='flip-card-title'>Login</h2>
-          <Login />
+          <Login onClose={onClose} />
           <p className="toggle-link" onClick={handleFlip}>
             Don't have an account? Register here
           </p>

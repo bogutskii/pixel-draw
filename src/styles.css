@@ -225,7 +225,10 @@ input:focus + .slider {
     background: #e6f8ff;
     border: 1px solid #06acd5
 }
-
+.color-item{
+    width: 20px;
+    height: 20px;
+}
 .btn {
     color: #000;
     background-color: rgba(239, 115, 115, .87);

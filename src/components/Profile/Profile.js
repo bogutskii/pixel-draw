@@ -4,7 +4,7 @@ import { logoutUser } from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,3 +26,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

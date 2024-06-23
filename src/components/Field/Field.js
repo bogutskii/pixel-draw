@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import './Field.css';
 import Brush from '../Tools/Brush';
 import ColorHistory from '../Tools/ColorHistory';
@@ -9,12 +9,29 @@ import domtoimage from 'dom-to-image';
 import ColorChanger from '../Tools/ColorChanger';
 import CurrentColor from '../Tools/CurrentColor';
 
-const Field = (props) => {
+const Field = () => {
   const [continueToDraw, setContinueToDraw] = useState(false);
   const [gridMap, setGridMap] = useState(true);
   const [fieldSize, setFieldSize] = useState('800');
 
-  const { field, changePixelColor, clearField, pixelSize } = props;
+  const dispatch = useDispatch();
+
+  const field = useSelector((state) => state.auth.field);
+  const pixelSize = useSelector((state) => state.auth.pixelSize);
+  const brush = useSelector((state) => state.auth.brush);
+
+  const changePixelColor = (index) => {
+    dispatch({
+      type: 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY',
+      payload: { index },
+    });
+  };
+
+  const clearField = () => {
+    dispatch({
+      type: 'CLEAR_FIELD',
+    });
+  };
 
   const onKeyPressed = (e) => {
     if (e.code === 'Space' || e.type === 'mousedown') {
@@ -31,13 +48,17 @@ const Field = (props) => {
   const saveToImage = () => {
     domtoimage
       .toJpeg(document.getElementById('capture'), { quality: 0.95 })
-      .then(function (dataUrl) {
+      .then((dataUrl) => {
         let link = document.createElement('a');
         link.download = 'my-image-name.jpeg';
         link.href = dataUrl;
         link.click();
       });
   };
+
+  if (!field || !Array.isArray(field)) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="wrap-app">
@@ -107,7 +128,7 @@ const Field = (props) => {
               }}
               onClick={() => changePixelColor(i)}
               onMouseOver={
-                props.brush !== 'fill' && props.brush !== 'fillPart'
+                brush !== 'fill' && brush !== 'fillPart'
                   ? () => changePixelColor(continueToDraw ? i : undefined)
                   : null
               }
@@ -124,23 +145,4 @@ const Field = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  field: state.field,
-  pixelSize: state.pixelSize,
-  brush: state.brush
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changePixelColor: (index) =>
-    dispatch({
-      type: 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY',
-      payload: { index }
-    }),
-  clearField: () =>
-    dispatch({
-      type: 'CLEAR_FIELD',
-      payload: {}
-    })
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Field);
+export default Field;

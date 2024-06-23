@@ -1,7 +1,12 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import drawField from './reducers';
 import thunk from 'redux-thunk';
+import drawField from './reducers';
 
-const store = createStore(drawField, composeWithDevTools(applyMiddleware(thunk)));
+const rootReducer = combineReducers({
+  auth: drawField,
+});
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
 export default store;

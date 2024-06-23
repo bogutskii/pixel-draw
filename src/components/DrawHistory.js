@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addDrawToHistory, deleteDraw, getDraws } from './redux/actions';
 import Preloader from './preloader/Preloader';
 import { v4 as uuidv4 } from 'uuid';
 
-const DrawHistory = (props) => {
+const DrawHistory = () => {
+  const dispatch = useDispatch();
+
+  const drawHistory = useSelector((state) => state.auth.drawHistory);
+  const field = useSelector((state) => state.auth.field);
+  const pixelSize = useSelector((state) => state.auth.pixelSize);
+  const fieldSize = useSelector((state) => state.auth.fieldSize);
+  const username = useSelector((state) => state.auth.username);
+
   useEffect(() => {
-    props.getDraws();
-  }, []);
+    dispatch(getDraws());
+  }, [dispatch]);
 
   const [inputName, setInputName] = useState('');
-  const { historyList, getFromHistory, pixelSize, field, fieldSize, username } = props;
 
   const addDrawToHistoryButtonHandler = () => {
     let newDraw = {
@@ -21,7 +28,7 @@ const DrawHistory = (props) => {
       username: username,
       id: uuidv4()
     };
-    props.addDrawToHistory(newDraw);
+    dispatch(addDrawToHistory(newDraw));
     setInputName('');
   };
 
@@ -32,9 +39,9 @@ const DrawHistory = (props) => {
   };
 
   const deleteDrawReq = (id, author) => {
-    if (username === author) {
-      props.deleteDraw(id);
-    }
+    // if (username === author) {
+      dispatch(deleteDraw(id));
+    // }
   };
 
   return (
@@ -51,12 +58,12 @@ const DrawHistory = (props) => {
           Save
         </button>
       </form>
-      {Array.isArray(historyList) && historyList.length ? (
+      {Array.isArray(drawHistory) && drawHistory.length ? (
         <ul className="list-ul">
-          {historyList.map((item, i) => (
+          {drawHistory.map((item, i) => (
             <li className="list-li" key={item.id || uuidv4()}>
               <div className="item_wrap">
-                <div className="child-grow" onClick={() => getFromHistory(i)}>
+                <div className="child-grow" onClick={() => dispatch({ type: 'GET_DRAW_FROM_HISTORY', payload: { index: i } })}>
                   {item.name + ' ' + item.username}
                 </div>
                 <div>
@@ -75,25 +82,4 @@ const DrawHistory = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  historyList: state.drawHistory,
-  field: state.field,
-  pixelSize: state.pixelSize,
-  fieldSize: state.fieldSize,
-  username: state.username
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  addDrawToHistory: (newDraw) => dispatch(addDrawToHistory(newDraw)),
-  deleteDraw: (id) => dispatch(deleteDraw(id)),
-  getDraws: () => dispatch(getDraws()),
-  getFromHistory: (index) =>
-    dispatch({
-      type: 'GET_DRAW_FROM_HISTORY',
-      payload: {
-        index
-      }
-    })
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(DrawHistory);
+export default DrawHistory;

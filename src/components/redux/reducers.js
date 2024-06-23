@@ -10,6 +10,7 @@ const initialState = {
   user: null,
   token: localStorage.getItem('accessToken') || null,
   authError: null,
+  isAuthenticated: false,
 };
 
 const drawField = (state = initialState, action) => {
@@ -169,13 +170,12 @@ const drawField = (state = initialState, action) => {
     case 'GET_DRAWS_FROM_SERVER':
       return {
         ...state,
-        drawHistory: action.payload
+        drawHistory: action.payload,
+        error: null,
       };
 
     case 'DELETE_DRAW_FROM_HISTORY':
-      const copyDrawList = [...state.drawHistory].filter(
-        (draw) => draw._id !== action.payload
-      );
+      const copyDrawList = state.drawHistory.filter((draw) => draw.id !== action.payload);
       return {
         ...state,
         drawHistory: copyDrawList
@@ -195,19 +195,22 @@ const drawField = (state = initialState, action) => {
     case 'LOGIN_USER_SUCCESS':
       return {
         ...state,
-        user: action.payload.user,
-        token: action.payload.token,
+        isAuthenticated: true,
+        user: action.payload,
         authError: null,
       };
     case 'REGISTER_USER_FAIL':
     case 'LOGIN_USER_FAIL':
       return {
         ...state,
+        isAuthenticated: false,
+        user: null,
         authError: action.payload,
       };
     case 'LOGOUT_USER':
       return {
         ...state,
+        isAuthenticated: false,
         user: null,
         token: null,
         authError: null,

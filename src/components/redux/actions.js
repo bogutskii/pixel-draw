@@ -1,6 +1,7 @@
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 
+
 export function getDraws() {
   return (dispatch) => {
     axios
@@ -11,7 +12,13 @@ export function getDraws() {
           payload: res.data,
         });
       })
-      .catch((err) => err);
+      .catch((err) => {
+        console.error('Error fetching draws:', err);
+        dispatch({
+          type: 'FETCH_DRAWS_ERROR',
+          payload: err.message,
+        });
+      });
   };
 }
 
@@ -31,19 +38,25 @@ export const addDrawToHistory = (newDraw) => async (dispatch) => {
   }
 };
 
-export function deleteDraw(id) {
+export const deleteDraw = (id) => {
   return (dispatch) => {
     axios
       .delete(`http://localhost:8000/draw/${id}`)
       .then((res) => {
         dispatch({
           type: 'DELETE_DRAW_FROM_HISTORY',
-          payload: { id },
+          payload: id,
         });
       })
-      .catch((err) => err);
+      .catch((err) => {
+        console.error('Error deleting draw:', err);
+        dispatch({
+          type: 'DELETE_DRAW_ERROR',
+          payload: err.message,
+        });
+      });
   };
-}
+};
 export const registerUser = (userData, callback) => {
   return async (dispatch) => {
     const encryptedPassword = CryptoJS.AES.encrypt(userData.password, process.env.REACT_APP_JWT_SECRET).toString();
@@ -51,12 +64,12 @@ export const registerUser = (userData, callback) => {
 
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL_LOCAL}/users/register`, encryptedUserData);
-      const { accessToken, refreshToken } = response.data;
+      const { accessToken, refreshToken, user } = response.data;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
       dispatch({
         type: 'REGISTER_USER_SUCCESS',
-        payload: response.data,
+        payload: user,
       });
       callback();
     } catch (error) {
@@ -75,12 +88,12 @@ export const loginUser = (userData, callback) => {
 
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL_LOCAL}/users/login`, encryptedUserData);
-      const { accessToken, refreshToken } = response.data;
+      const { accessToken, refreshToken, user } = response.data;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
       dispatch({
         type: 'LOGIN_USER_SUCCESS',
-        payload: response.data,
+        payload: user,
       });
       callback();
     } catch (error) {
