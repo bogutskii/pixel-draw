@@ -18,9 +18,16 @@ const drawField = (state = initialState, action) => {
     case 'CHANGE_CURRENT_COLOR':
       return {
         ...state,
-        currentColor: action.payload.color
+        currentColor: action.payload.color,
       };
-    // ******** START DRAW FUNCTIONAL **********************
+    case 'ADD_COLOR_TO_HISTORY':
+      if (!state.historyColor.includes(action.payload.color)) {
+        return {
+          ...state,
+          historyColor: [...state.historyColor, action.payload.color]
+        };
+      }
+      return state;
     case 'CHANGE_PIXEL_COLOR_AND_SAVE_TO_HISTORY':
       let copyField;
       const copyHistoryColor = [...state.historyColor, state.currentColor];
@@ -28,7 +35,7 @@ const drawField = (state = initialState, action) => {
         if (action.payload.index) {
           return {
             ...state,
-            currentColor: state.field[action.payload.index].color
+            currentColor: state.field[action.payload.index].color,
           };
         }
       }
@@ -40,11 +47,11 @@ const drawField = (state = initialState, action) => {
           size,
           state.fieldSize,
           state.field[action.payload.index].color,
-          state.currentColor
+          state.currentColor,
         );
         return {
           ...state,
-          field: newField
+          field: newField,
         };
       }
 
@@ -226,37 +233,40 @@ const drawField = (state = initialState, action) => {
 };
 
 function fillParticip(arrJSON, current, size, max, oldColor, newColor) {
-  console.log(current, size, oldColor);
   const a = JSON.parse(arrJSON);
   if (oldColor === newColor) return a;
 
   let next = [];
-  const stop = [];
+  const stop = new Set();
 
   function ch(current) {
     if (a[current] && a[current].color === oldColor) {
       a[current].color = newColor;
-      stop.push(current);
+      stop.add(current);
       let up = current - size;
       let down = current + size;
       let left = current - 1;
       let right = current + 1;
-      if (right % size === 0) {
-        stop.push(right);
+
+      if (current % size !== 0) {
+        next.push(left);
       }
-      if (left % size === size - 1) {
-        stop.push(left);
+      if ((current + 1) % size !== 0) {
+        next.push(right);
       }
-      next.push(
-        ...[up, down, left, right].filter(
-          (e) => e >= 0 && !stop.includes(e) && !next.includes(e) && e <= max
-        )
-      );
+      if (up >= 0) {
+        next.push(up);
+      }
+      if (down < max) {
+        next.push(down);
+      }
+
+      next = next.filter((e) => e >= 0 && !stop.has(e));
     } else {
-      stop.push(current);
+      stop.add(current);
     }
     next = next.filter((el) => el !== current);
-    return next.length > 0 ? ch(next[0], size, newColor, max) : a;
+    return next.length > 0 ? ch(next[0]) : a;
   }
 
   return ch(current);

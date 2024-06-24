@@ -110,7 +110,10 @@ input:checked + .slider:before {
 .btn-pushed {
     background: linear-gradient(to bottom, #fceadd 5%, rgba(226, 91, 255, .94) 100%)
 }
+.btn-pushed:hover{
+    background: linear-gradient(to bottom, #fad5ba 5%, rgba(204, 30, 241, 0.94) 100%)
 
+}
 .warn {
     background: linear-gradient(to bottom, #fcdde3 5%, rgba(245, 130, 140, .65) 100%);
     border: 1px solid #ef6565

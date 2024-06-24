@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import history_del from '../icons/history_del.png';
@@ -6,19 +6,19 @@ import history_del from '../icons/history_del.png';
 const ColorHistory = () => {
   const dispatch = useDispatch();
   const historyColor = useSelector((state) => state.auth.historyColor);
-console.log(historyColor)
-  const changeColor = (color) => {
+
+  const changeColor = useCallback((color) => {
     dispatch({
       type: 'CHANGE_CURRENT_COLOR',
       payload: { color },
     });
-  };
+  }, [dispatch]);
 
-  const deleteColorHistory = () => {
+  const deleteColorHistory = useCallback(() => {
     dispatch({
       type: 'DELETE_COLOR_HISTORY',
     });
-  };
+  }, [dispatch]);
 
   return (
     <div className="container">
@@ -43,4 +43,4 @@ console.log(historyColor)
   );
 };
 
-export default ColorHistory;
+export default React.memo(ColorHistory);

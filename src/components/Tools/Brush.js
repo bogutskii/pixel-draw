@@ -1,11 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import fill from '../icons/fill.png';
 import random from '../icons/random.jpeg';
 import colorpicker from '../icons/colorpicker.png';
 
-const Brush = ({ changeBrush, fieldRandomBrush, brush }) => {
+const Brush = () => {
+  const dispatch = useDispatch();
+  const brush = useSelector((state) => state.auth.brush);
+
   const brushTypes = [
     { type: 'dot', label: '▣' },
     { type: 'horizontal', label: '↔' },
@@ -15,8 +18,22 @@ const Brush = ({ changeBrush, fieldRandomBrush, brush }) => {
     { type: 'fillPart', label: 'fillPart' },
     { type: 'mirrorH', label: '═' },
     { type: 'mirrorV', label: '||' },
-    { type: 'color-picker', label: <img src={colorpicker} className="img-icon-btn" alt="icon-colorpicker" /> }
+    { type: 'color-picker', label: <img src={colorpicker} className="img-icon-btn" alt="icon-colorpicker" /> },
   ];
+
+  const changeBrush = (type) => {
+    dispatch({
+      type: 'CHANGE_BRUSH',
+      payload: { brush: type },
+    });
+  };
+
+  const fieldRandomBrush = () => {
+    dispatch({
+      type: 'FILL_RANDOM_BRUSH',
+      payload: {},
+    });
+  };
 
   return (
     <div className="brush-block">
@@ -36,19 +53,4 @@ const Brush = ({ changeBrush, fieldRandomBrush, brush }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  brush: state.brush
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changeBrush: (brush) => dispatch({
-    type: 'CHANGE_BRUSH',
-    payload: { brush }
-  }),
-  fieldRandomBrush: () => dispatch({
-    type: 'FILL_RANDOM_BRUSH',
-    payload: {}
-  })
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Brush);
+export default Brush;
